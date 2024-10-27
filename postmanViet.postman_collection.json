@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "f488b630-1d9f-4361-8a0e-376b21adbf47",
+		"_postman_id": "0ccff696-7040-4e03-996d-e8dccab6376a",
 		"name": "postmanViet",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29877640"
+		"_exporter_id": "39312366"
 	},
 	"item": [
 		{
@@ -1034,223 +1034,298 @@
 			"name": "MusicService",
 			"item": [
 				{
-					"name": "Get all song (gateway)",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "",
-									"type": "string"
+					"name": "playlist",
+					"item": [
+						{
+							"name": "add song to playlist (gateway)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJlY2I1NmI1Yy1mZTI1LTQ0NDctOWI1Yy1hMjdiNDk3MzFhYjYiLCJleHAiOjE3Mjk1MTk3OTksImlhdCI6MTcyOTUxNjE5OSwianRpIjoiY2EyZmY5MGEtMjc0Yi00MjkxLWEyMjMtNWNiMTA2OTQ4ODVlIiwic2NvcGUiOiJST0xFX0FETUlOIn0.D9Qhk3ybISPbNK9SvncuPCUBOjqsOH6a2O76eJjHa0hAVSjxH65E--PgyR2hBG-iyGiDy1D5AO5bUokuV3P0LA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\"1\",\"2\",\"3\"]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8888/api/v1/music/playlists/addSongs/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8888",
+									"path": [
+										"api",
+										"v1",
+										"music",
+										"playlists",
+										"addSongs",
+										"1"
+									]
 								}
-							]
+							},
+							"response": []
 						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8888/api/v1/music/songs",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8888",
-							"path": [
-								"api",
-								"v1",
-								"music",
-								"songs"
-							]
+						{
+							"name": "Get all playlist (gateway)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8888/api/v1/music/playlists",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8888",
+									"path": [
+										"api",
+										"v1",
+										"music",
+										"playlists"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAllSongsInPlaylist",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJlY2I1NmI1Yy1mZTI1LTQ0NDctOWI1Yy1hMjdiNDk3MzFhYjYiLCJleHAiOjE3Mjk1MTk3OTksImlhdCI6MTcyOTUxNjE5OSwianRpIjoiY2EyZmY5MGEtMjc0Yi00MjkxLWEyMjMtNWNiMTA2OTQ4ODVlIiwic2NvcGUiOiJST0xFX0FETUlOIn0.D9Qhk3ybISPbNK9SvncuPCUBOjqsOH6a2O76eJjHa0hAVSjxH65E--PgyR2hBG-iyGiDy1D5AO5bUokuV3P0LA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8888/api/v1/music/playlists/GetAllSongsInPlaylist/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8888",
+									"path": [
+										"api",
+										"v1",
+										"music",
+										"playlists",
+										"GetAllSongsInPlaylist",
+										"1"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Get all playlist (gateway)",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "",
-									"type": "string"
+					"name": "song",
+					"item": [
+						{
+							"name": "Get all song (gateway)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8888/api/v1/music/songs?page=1&size=3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8888",
+									"path": [
+										"api",
+										"v1",
+										"music",
+										"songs"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "3"
+										}
+									]
 								}
-							]
+							},
+							"response": []
 						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8888/api/v1/music/playlists",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8888",
-							"path": [
-								"api",
-								"v1",
-								"music",
-								"playlists"
-							]
+						{
+							"name": "Get song (gateway)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiI3ZGU1MDZhZi0zZDljLTQyODMtYTg1MS1kMGU3NDdjNDRhODkiLCJleHAiOjE3Mjk3NDUwMjksImlhdCI6MTcyOTc0MTQyOSwianRpIjoiNmFjY2EyMTktMWNkYS00NzYxLWI0ZjgtZmU3NmY2NGFlOTVjIiwic2NvcGUiOiJST0xFX0FkbWluIGxpc3Rlbl9wcmVtaXVtX211c2ljIHVwbG9hZF9tdXNpYyBsaXN0ZW5fZnJlZV9tdXNpYyBtYW5hZ2VfYWxsX211c2ljIG1hbmFnZV9zdWJzY3JpcHRpb25zIG1hbmFnZV9vd25fbXVzaWMgbWFuYWdlX3VzZXJzIHZpZXdfc3RhdGlzdGljcyJ9.bSN5SQQ2XqpYw82PxEpvtH_Nur_WboRTpWdjB_bDW57eJFVWO1xpyTq6HuxsLHMEQtZEpw59qXgNNkIWCF-lqQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8888/api/v1/music/songs/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8888",
+									"path": [
+										"api",
+										"v1",
+										"music",
+										"songs",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get song all by id (gateway)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiI3ZGU1MDZhZi0zZDljLTQyODMtYTg1MS1kMGU3NDdjNDRhODkiLCJleHAiOjE3Mjk3NDUwMjksImlhdCI6MTcyOTc0MTQyOSwianRpIjoiNmFjY2EyMTktMWNkYS00NzYxLWI0ZjgtZmU3NmY2NGFlOTVjIiwic2NvcGUiOiJST0xFX0FkbWluIGxpc3Rlbl9wcmVtaXVtX211c2ljIHVwbG9hZF9tdXNpYyBsaXN0ZW5fZnJlZV9tdXNpYyBtYW5hZ2VfYWxsX211c2ljIG1hbmFnZV9zdWJzY3JpcHRpb25zIG1hbmFnZV9vd25fbXVzaWMgbWFuYWdlX3VzZXJzIHZpZXdfc3RhdGlzdGljcyJ9.bSN5SQQ2XqpYw82PxEpvtH_Nur_WboRTpWdjB_bDW57eJFVWO1xpyTq6HuxsLHMEQtZEpw59qXgNNkIWCF-lqQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\"1\",\"2\",\"3\"]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8888/api/v1/music/songs/ids",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8888",
+									"path": [
+										"api",
+										"v1",
+										"music",
+										"songs",
+										"ids"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete Song (gateway)",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8888/api/v1/music/songs/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8888",
+									"path": [
+										"api",
+										"v1",
+										"music",
+										"songs",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create Song (gateway)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"1\",\r\n  \"name\": \"SongName\",\r\n  \"title\": \"Title\",\r\n  \"album\": \"Album\",\r\n  \"duration\": 240,\r\n  \"desc\": \"Description\",\r\n  \"releaseDate\": \"2024-10-27\",\r\n  \"artistID\": [\"\", \"\"]\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8888/api/v1/music/songs/createSong",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8888",
+									"path": [
+										"api",
+										"v1",
+										"music",
+										"songs",
+										"createSong"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get song (gateway)",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiI3ZGU1MDZhZi0zZDljLTQyODMtYTg1MS1kMGU3NDdjNDRhODkiLCJleHAiOjE3Mjk3NDUwMjksImlhdCI6MTcyOTc0MTQyOSwianRpIjoiNmFjY2EyMTktMWNkYS00NzYxLWI0ZjgtZmU3NmY2NGFlOTVjIiwic2NvcGUiOiJST0xFX0FkbWluIGxpc3Rlbl9wcmVtaXVtX211c2ljIHVwbG9hZF9tdXNpYyBsaXN0ZW5fZnJlZV9tdXNpYyBtYW5hZ2VfYWxsX211c2ljIG1hbmFnZV9zdWJzY3JpcHRpb25zIG1hbmFnZV9vd25fbXVzaWMgbWFuYWdlX3VzZXJzIHZpZXdfc3RhdGlzdGljcyJ9.bSN5SQQ2XqpYw82PxEpvtH_Nur_WboRTpWdjB_bDW57eJFVWO1xpyTq6HuxsLHMEQtZEpw59qXgNNkIWCF-lqQ",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8888/api/v1/music/songs/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8888",
-							"path": [
-								"api",
-								"v1",
-								"music",
-								"songs",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get song all by id (gateway)",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiI3ZGU1MDZhZi0zZDljLTQyODMtYTg1MS1kMGU3NDdjNDRhODkiLCJleHAiOjE3Mjk3NDUwMjksImlhdCI6MTcyOTc0MTQyOSwianRpIjoiNmFjY2EyMTktMWNkYS00NzYxLWI0ZjgtZmU3NmY2NGFlOTVjIiwic2NvcGUiOiJST0xFX0FkbWluIGxpc3Rlbl9wcmVtaXVtX211c2ljIHVwbG9hZF9tdXNpYyBsaXN0ZW5fZnJlZV9tdXNpYyBtYW5hZ2VfYWxsX211c2ljIG1hbmFnZV9zdWJzY3JpcHRpb25zIG1hbmFnZV9vd25fbXVzaWMgbWFuYWdlX3VzZXJzIHZpZXdfc3RhdGlzdGljcyJ9.bSN5SQQ2XqpYw82PxEpvtH_Nur_WboRTpWdjB_bDW57eJFVWO1xpyTq6HuxsLHMEQtZEpw59qXgNNkIWCF-lqQ",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\"1\",\"2\",\"3\"]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8888/api/v1/music/songs/ids",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8888",
-							"path": [
-								"api",
-								"v1",
-								"music",
-								"songs",
-								"ids"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "add song  (gateway)",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJlY2I1NmI1Yy1mZTI1LTQ0NDctOWI1Yy1hMjdiNDk3MzFhYjYiLCJleHAiOjE3Mjk1MTk3OTksImlhdCI6MTcyOTUxNjE5OSwianRpIjoiY2EyZmY5MGEtMjc0Yi00MjkxLWEyMjMtNWNiMTA2OTQ4ODVlIiwic2NvcGUiOiJST0xFX0FETUlOIn0.D9Qhk3ybISPbNK9SvncuPCUBOjqsOH6a2O76eJjHa0hAVSjxH65E--PgyR2hBG-iyGiDy1D5AO5bUokuV3P0LA",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\"1\",\"2\",\"3\"]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8888/api/v1/music/playlists/addSongs/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8888",
-							"path": [
-								"api",
-								"v1",
-								"music",
-								"playlists",
-								"addSongs",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetAllSongsInPlaylist",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJlY2I1NmI1Yy1mZTI1LTQ0NDctOWI1Yy1hMjdiNDk3MzFhYjYiLCJleHAiOjE3Mjk1MTk3OTksImlhdCI6MTcyOTUxNjE5OSwianRpIjoiY2EyZmY5MGEtMjc0Yi00MjkxLWEyMjMtNWNiMTA2OTQ4ODVlIiwic2NvcGUiOiJST0xFX0FETUlOIn0.D9Qhk3ybISPbNK9SvncuPCUBOjqsOH6a2O76eJjHa0hAVSjxH65E--PgyR2hBG-iyGiDy1D5AO5bUokuV3P0LA",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8888/api/v1/music/playlists/GetAllSongsInPlaylist/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8888",
-							"path": [
-								"api",
-								"v1",
-								"music",
-								"playlists",
-								"GetAllSongsInPlaylist",
-								"1"
-							]
-						}
-					},
-					"response": []
+					]
 				},
 				{
 					"name": "get img  (gateway)",
