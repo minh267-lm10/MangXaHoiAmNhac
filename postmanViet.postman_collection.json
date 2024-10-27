@@ -12,6 +12,16 @@
 				{
 					"name": "create Profile (gateway)",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiI2MmUwZTQxMC1lN2Q3LTRlOGItOTQzMC1mMDdlNTkwOTQ3MzMiLCJleHAiOjE3MzAwMzMxODAsImlhdCI6MTcyOTk5NzE4MCwianRpIjoiODhkYThhMjYtYmM0My00MmYxLWEwOWMtNDk5YWVlYmQ3YTQyIiwic2NvcGUiOiJST0xFX0dVRVNUIGxpc3Rlbl9mcmVlX211c2ljIn0.-CqpOVXl652smtfqYZ1s5kJbtnz0FQC4mO4h30DDPyjDRicgOVZxYa6CTidFc5a9OAAu7q_riZUNiz1W9-qA5A",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -75,6 +85,39 @@
 					"response": []
 				},
 				{
+					"name": "get my profile(gateway)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiI2MmUwZTQxMC1lN2Q3LTRlOGItOTQzMC1mMDdlNTkwOTQ3MzMiLCJleHAiOjE3MzAwMzMxODAsImlhdCI6MTcyOTk5NzE4MCwianRpIjoiODhkYThhMjYtYmM0My00MmYxLWEwOWMtNDk5YWVlYmQ3YTQyIiwic2NvcGUiOiJST0xFX0dVRVNUIGxpc3Rlbl9mcmVlX211c2ljIn0.-CqpOVXl652smtfqYZ1s5kJbtnz0FQC4mO4h30DDPyjDRicgOVZxYa6CTidFc5a9OAAu7q_riZUNiz1W9-qA5A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/api/v1/profile/users/my-profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"profile",
+								"users",
+								"my-profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "get All Profiles (gateway)",
 					"request": {
 						"auth": {
@@ -112,7 +155,7 @@
 			"name": "Identity service",
 			"item": [
 				{
-					"name": "create User (gateway)",
+					"name": "create guest (gateway)",
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -121,7 +164,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"john2\",\r\n    \"password\": \"12345\",\r\n    \"email\": \"john123@yopmail.com\",\r\n    \"firstName\": \"Jame4\",\r\n    \"lastName\": \"Bond\",\r\n    \"dob\": \"2000-04-08\",\r\n    \"city\" : \"London\"\r\n}",
+							"raw": "{\r\n    \"username\": \"john99\",\r\n    \"password\": \"123456\",\r\n    \"email\": \"john123@yopmail.com\",\r\n    \"firstName\": \"Jame4\",\r\n    \"lastName\": \"Bond\",\r\n    \"dob\": \"2000-04-08\",\r\n    \"city\" : \"London\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -129,7 +172,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8888/api/v1/identity/users/registration",
+							"raw": "http://localhost:8888/api/v1/identity/users/registration/guest",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -140,7 +183,41 @@
 								"v1",
 								"identity",
 								"users",
-								"registration"
+								"registration",
+								"guest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create artist (gateway)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"tung1\",\r\n    \"password\": \"123456\",\r\n    \"email\": \"john123@yopmail.com\",\r\n    \"firstName\": \"Thanh Tùng\",\r\n    \"lastName\": \"Nguyễn\",\r\n    \"stageName\":\"Sơn Tùng MPT\",\r\n    \"dob\": \"2000-04-08\",\r\n    \"city\" : \"London\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/api/v1/identity/users/registration/artist",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"identity",
+								"users",
+								"registration",
+								"artist"
 							]
 						}
 					},
@@ -153,7 +230,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admina\"\r\n}",
+							"raw": "{\r\n    \"username\": \"john2\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -964,7 +1041,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiI3ZGU1MDZhZi0zZDljLTQyODMtYTg1MS1kMGU3NDdjNDRhODkiLCJleHAiOjE3Mjk3NDUwMjksImlhdCI6MTcyOTc0MTQyOSwianRpIjoiNmFjY2EyMTktMWNkYS00NzYxLWI0ZjgtZmU3NmY2NGFlOTVjIiwic2NvcGUiOiJST0xFX0FkbWluIGxpc3Rlbl9wcmVtaXVtX211c2ljIHVwbG9hZF9tdXNpYyBsaXN0ZW5fZnJlZV9tdXNpYyBtYW5hZ2VfYWxsX211c2ljIG1hbmFnZV9zdWJzY3JpcHRpb25zIG1hbmFnZV9vd25fbXVzaWMgbWFuYWdlX3VzZXJzIHZpZXdfc3RhdGlzdGljcyJ9.bSN5SQQ2XqpYw82PxEpvtH_Nur_WboRTpWdjB_bDW57eJFVWO1xpyTq6HuxsLHMEQtZEpw59qXgNNkIWCF-lqQ",
+									"value": "",
 									"type": "string"
 								}
 							]
@@ -996,7 +1073,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiI3ZGU1MDZhZi0zZDljLTQyODMtYTg1MS1kMGU3NDdjNDRhODkiLCJleHAiOjE3Mjk3NDUwMjksImlhdCI6MTcyOTc0MTQyOSwianRpIjoiNmFjY2EyMTktMWNkYS00NzYxLWI0ZjgtZmU3NmY2NGFlOTVjIiwic2NvcGUiOiJST0xFX0FkbWluIGxpc3Rlbl9wcmVtaXVtX211c2ljIHVwbG9hZF9tdXNpYyBsaXN0ZW5fZnJlZV9tdXNpYyBtYW5hZ2VfYWxsX211c2ljIG1hbmFnZV9zdWJzY3JpcHRpb25zIG1hbmFnZV9vd25fbXVzaWMgbWFuYWdlX3VzZXJzIHZpZXdfc3RhdGlzdGljcyJ9.bSN5SQQ2XqpYw82PxEpvtH_Nur_WboRTpWdjB_bDW57eJFVWO1xpyTq6HuxsLHMEQtZEpw59qXgNNkIWCF-lqQ",
+									"value": "",
 									"type": "string"
 								}
 							]
