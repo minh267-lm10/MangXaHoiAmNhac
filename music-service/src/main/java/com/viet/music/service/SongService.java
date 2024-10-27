@@ -1,11 +1,16 @@
 package com.viet.music.service;
 
+import java.time.Instant;
 import java.util.List;
 
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
+import com.viet.music.dto.PageResponse;
 import com.viet.music.dto.request.SongRequest;
 import com.viet.music.dto.response.SongResponse;
 import com.viet.music.entity.Song;
@@ -27,8 +32,21 @@ public class SongService {
 	SongRepository songRepository;
 	
 //    @PreAuthorize("hasRole('ADMIN')")
-	public List<SongResponse> getAllSong(){
-		return  songRepository.findAll().stream().map(t -> mapper.toSongResponse(t)).toList();
+	public PageResponse<SongResponse> getAllSongs(int page, int size){
+		
+        Sort sort = Sort.by("createdDate").descending();
+        Pageable pageable = PageRequest.of(page - 1, size, sort);
+        var pageData = songRepository.findAll(pageable);
+
+        return PageResponse.<SongResponse>builder()
+                .currentPage(page)
+                .pageSize(pageData.getSize())
+                .totalPages(pageData.getTotalPages())
+                .totalElements(pageData.getTotalElements())
+                .data(pageData.getContent()
+                		.stream()
+                		.map(t -> mapper.toSongResponse(t)).toList())
+                .build();
 	}
     
 //    @PreAuthorize("hasRole('ADMIN')")
@@ -46,6 +64,7 @@ public class SongService {
 
 	public SongResponse createSong(SongRequest request) {
 		Song song= mapper.toSong(request);
+		song.setCreatedDate(Instant.now());
 		songRepository.save(song);
         try {
         	song=songRepository.save(song);

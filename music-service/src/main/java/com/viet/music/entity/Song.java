@@ -1,5 +1,6 @@
 package com.viet.music.entity;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -31,4 +32,5 @@ public class Song {
 	String desc;
 	LocalDate releaseDate;
 	List<String> artistID;
+	Instant createdDate;
 }

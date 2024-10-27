@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.viet.music.dto.ApiResponse;
+import com.viet.music.dto.PageResponse;
 import com.viet.music.dto.request.SongRequest;
 import com.viet.music.dto.response.SongResponse;
 import com.viet.music.service.SongService;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 @RestController
 @RequiredArgsConstructor
 //@Slf4j
@@ -31,9 +32,12 @@ public class SongController {
 	SongService songService;
 
 	@GetMapping
-	public ApiResponse<List<SongResponse>> getAllSong() {
-		return ApiResponse.<List<SongResponse>>builder()
-				.result(songService.getAllSong())
+	public ApiResponse<PageResponse<SongResponse>> getAllSong(
+            @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(value = "size", required = false, defaultValue = "10") int size
+			) {
+		return ApiResponse.<PageResponse<SongResponse>>builder()
+				.result(songService.getAllSongs(page,size))
 				.build();
 	}
 	@GetMapping("/{id}")
