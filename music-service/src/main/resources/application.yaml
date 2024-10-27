@@ -1,0 +1,10 @@
+server:
+  port: 8091
+  servlet:
+    context-path: /music
+spring:
+  application:
+    name: music-service
+  data:
+    mongodb:
+      uri: mongodb://root:root@localhost:27017/music-service?authSource=admin
