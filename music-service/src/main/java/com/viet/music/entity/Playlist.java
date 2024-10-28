@@ -23,6 +23,6 @@ public class Playlist {
 	String name;
 	String desc;
 	String image;
-	String userID;
-	List<String> songIDs; 
+	String userId;
+	List<String> songIds; 
 }

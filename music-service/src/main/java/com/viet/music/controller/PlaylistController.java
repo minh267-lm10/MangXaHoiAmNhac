@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.viet.music.dto.ApiResponse;
+import com.viet.music.dto.PageResponse;
 import com.viet.music.dto.response.PlaylistResponse;
 import com.viet.music.dto.response.SongResponse;
 import com.viet.music.service.PlaylistService;
@@ -45,10 +46,14 @@ public class PlaylistController {
 	}
 	
 	@GetMapping
-	public ApiResponse<List<PlaylistResponse>> getAllPlaylist() {
-		return ApiResponse.<List<PlaylistResponse>>builder()
-				.result(playlistService.getAllPlaylist()) 
-				
+	public ApiResponse<List<PlaylistResponse>> getAllPlaylist(
+			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(value = "size", required = false, defaultValue = "10") int size
+            ) {
+		
+		return ApiResponse.<PageResponse<PlaylistResponse>>builder()
+				.result(playlistService.getAllPlaylist(page,size))
 				.build();
+		
 	}
 }

@@ -23,5 +23,5 @@ public class SongRequest {
 	int duration; // duration in seconds
 	String desc;
 	LocalDate releaseDate;
-	List<String> artistID;
+	List<String> artistIds;
 }

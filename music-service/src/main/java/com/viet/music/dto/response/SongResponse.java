@@ -25,5 +25,5 @@ public class SongResponse {
 	String image;
 	String desc;
 	LocalDate releaseDate;
-	List<String> artistID;
+	List<String> artistIds;
 }

@@ -18,6 +18,6 @@ public class PlaylistResponse {
 	String name;
 	String desc;
 	String image;
-	String userID;
+	String userId;
 
 }

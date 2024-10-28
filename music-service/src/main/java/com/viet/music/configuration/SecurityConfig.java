@@ -18,7 +18,13 @@ public class SecurityConfig {
 
     private static final String[] PUBLIC_ENDPOINTS = {
 
-    		  "/data/img/**", "/data/stream/**", "/songs","/playlists/GetAllSongsInPlaylist/**"
+    		  "/data/img/**", 
+    		  "/data/stream/**",
+    		  "/songs",
+    		  "/songs/**",
+    		  "/playlists",
+    		  "/playlists/**",
+    		  "/playlists/GetAllSongsInPlaylist/**"
 
     };
 

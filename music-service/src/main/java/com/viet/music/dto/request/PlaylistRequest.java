@@ -18,5 +18,5 @@ public class PlaylistRequest {
 	String id;
 	String name;
 	String desc;
-	List<String> songID; // List of Song objects
+	List<String> songId; // List of Song objects
 }

@@ -39,11 +39,14 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
     @NonFinal
     private String[] publicEndpoints = {
             "/identity/auth/.*",
-            "/identity/users/registration",
+            "/identity/users/registration/.*",
             "/notification/email/send",
 	  		"/music/data/img/.*",
 	  		"/music/data/stream/.*",
 	  		"/music/songs",
+	  		"/music/songs/.*",
+	  		"/music/playlists",
+	  		"/music/playlists/.*",
 	  		"/music/playlists/GetAllSongsInPlaylist/.*"
     };
 

@@ -43,12 +43,49 @@ public class UserService {
     ProfileClient profileClient;
     KafkaTemplate<String, Object> kafkaTemplate;
 
-    public UserResponse createUser(UserCreationRequest request) {
+    public UserResponse createGuest(UserCreationRequest request) {
         User user = userMapper.toUser(request);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         HashSet<Role> roles = new HashSet<>();
 
-        roleRepository.findById(PredefinedRole.USER_ROLE).ifPresent(roles::add);
+        roleRepository.findById(PredefinedRole.GUEST_ROLE).ifPresent(roles::add);
+
+        user.setRoles(roles);
+        user.setEmailVerified(false);
+
+        try {
+            user = userRepository.save(user);
+        } catch (DataIntegrityViolationException exception) {
+            throw new AppException(ErrorCode.USER_EXISTED);
+        }
+
+        var profileRequest = profileMapper.toProfileCreationRequest(request);
+        profileRequest.setUserId(user.getId());
+
+        var profile = profileClient.createProfile(profileRequest);
+
+        NotificationEvent notificationEvent = NotificationEvent.builder()
+                .channel("EMAIL")
+                .recipient(request.getEmail())
+                .subject("Welcome to ---")
+                .body("Hello, " + request.getUsername())
+                .build();
+
+        // Publish message to kafka
+        kafkaTemplate.send("notification-delivery", notificationEvent);
+
+        var userCreationReponse = userMapper.toUserResponse(user);
+        userCreationReponse.setId(profile.getResult().getId());
+
+        return userCreationReponse;
+    }
+
+    public UserResponse createArtist(UserCreationRequest request) {
+        User user = userMapper.toUser(request);
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        HashSet<Role> roles = new HashSet<>();
+
+        roleRepository.findById(PredefinedRole.ARTIST_ROLE).ifPresent(roles::add);
 
         user.setRoles(roles);
         user.setEmailVerified(false);

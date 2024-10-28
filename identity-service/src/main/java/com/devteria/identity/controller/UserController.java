@@ -25,10 +25,17 @@ import lombok.extern.slf4j.Slf4j;
 public class UserController {
     UserService userService;
 
-    @PostMapping("/registration")
-    ApiResponse<UserResponse> createUser(@RequestBody @Valid UserCreationRequest request) {
+    @PostMapping("/registration/guest")
+    ApiResponse<UserResponse> createGuest(@RequestBody @Valid UserCreationRequest request) {
         return ApiResponse.<UserResponse>builder()
-                .result(userService.createUser(request))
+                .result(userService.createGuest(request))
+                .build();
+    }
+
+    @PostMapping("/registration/artist")
+    ApiResponse<UserResponse> createArtist(@RequestBody @Valid UserCreationRequest request) {
+        return ApiResponse.<UserResponse>builder()
+                .result(userService.createArtist(request))
                 .build();
     }
 

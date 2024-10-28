@@ -5,10 +5,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.viet.music.dto.PageResponse;
 import com.viet.music.dto.response.PlaylistResponse;
 import com.viet.music.dto.response.SongResponse;
 import com.viet.music.entity.Playlist;
@@ -37,7 +41,7 @@ public class PlaylistService {
 				.orElseThrow(
 						() -> new AppException(ErrorCode.KHONG_TON_TAI_PLAYLIST
 								));
-		List<String> SongIDs=playlist.getSongIDs();
+		List<String> SongIDs=playlist.getSongIds();
 		return songService.getSongAllById(SongIDs);
 	}
 
@@ -51,10 +55,10 @@ public class PlaylistService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = authentication.getName();
         
-        if(userId==playlist.getUserID()) {
-    		Set<String> vietSet=new HashSet<>(playlist.getSongIDs());
+        if(userId==playlist.getUserId()) {
+    		Set<String> vietSet=new HashSet<>(playlist.getSongIds());
     		vietSet.addAll(id);
-    		playlist.setSongIDs(new ArrayList<>(vietSet));
+    		playlist.setSongIds(new ArrayList<>(vietSet));
     		playlist=playlistRepository.save(playlist);
     		return GetAllSongsInPlaylist(playlistId);
         }else {
@@ -63,7 +67,13 @@ public class PlaylistService {
         
 	}
 
-	public List<PlaylistResponse> getAllPlaylist() {
-		return  playlistRepository.findAll().stream().map(t -> mapper.toPlaylistReponse(t)).toList();
-	}        
+	public PageResponse<PlaylistResponse> getAllPlaylist(String page,String size) {
+		Sort sort=Sort.by("").descending();
+		
+		return PageResponse.<PlaylistResponse>builder()
+				.currentPage(0)
+				.currentPage(0)
+				.data(null)
+				.build();
+		}        
 }

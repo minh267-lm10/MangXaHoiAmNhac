@@ -53,7 +53,7 @@ public class SongController {
 				.build();
 	}
 	
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteSong/{id}")
     ApiResponse<String> deleteSong(@PathVariable String id) {
         songService.deleteSong(id);
         return ApiResponse.<String>builder().result("song has been deleted").build();
@@ -65,6 +65,12 @@ public class SongController {
                 .result(songService.createSong(request))
                 .build();
     }
+    @GetMapping("getSongsByArtistId/{id}")
+	ApiResponse<List<SongResponse>> getSongsByArtistId(@PathVariable String artistId){
+		 return ApiResponse.<List<SongResponse>>builder()
+	                .result(songService.getSongsByArtistId(artistId))
+	                .build();
+	}
 	
 
 }

@@ -31,6 +31,6 @@ public class Song {
 	String image;
 	String desc;
 	LocalDate releaseDate;
-	List<String> artistID;
+	List<String> artistIds;
 	Instant createdDate;
 }
