@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.viet.music.dto.ApiResponse;
 import com.viet.music.dto.PageResponse;
+import com.viet.music.dto.request.PlaylistRequest;
+import com.viet.music.dto.request.SongRequest;
 import com.viet.music.dto.response.PlaylistResponse;
 import com.viet.music.dto.response.SongResponse;
 import com.viet.music.service.PlaylistService;
 
+import jakarta.validation.Valid;
 import jakarta.websocket.server.PathParam;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +41,13 @@ public class PlaylistController {
                 .build();
 	}
 	
+    @PostMapping("/createPlaylist")
+    ApiResponse<PlaylistResponse> createPlaylist(@RequestBody PlaylistRequest playlistRequest) {
+        return ApiResponse.<PlaylistResponse>builder()
+                .result(playlistService.createPlaylist(playlistRequest))
+                .build();
+    }
+	
 	@GetMapping("GetAllSongsInPlaylist/{id}")
 	ApiResponse<List<SongResponse>> GetAllSongsInPlaylist(@PathVariable String id){
 		 return ApiResponse.<List<SongResponse>>builder()
@@ -56,4 +66,5 @@ public class PlaylistController {
 				.build();
 		
 	}
+	
 }
