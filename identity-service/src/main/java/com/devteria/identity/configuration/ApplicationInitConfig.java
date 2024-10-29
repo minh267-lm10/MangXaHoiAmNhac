@@ -160,13 +160,13 @@ public class ApplicationInitConfig {
                         .email("tung@yopmail.com")
                         .emailVerified(false)
                         .build();
-                user.setPassword(passwordEncoder.encode("123456"));
+                sonTung.setPassword(passwordEncoder.encode("123456"));
                 HashSet<Role> roles = new HashSet<>();
 
                 roleRepository.findById(PredefinedRole.ARTIST_ROLE).ifPresent(roles::add);
 
-                user.setRoles(roles);
-                user = userRepository.save(sonTung);
+                sonTung.setRoles(roles);
+                userRepository.save(sonTung);
             }
         };
     }
