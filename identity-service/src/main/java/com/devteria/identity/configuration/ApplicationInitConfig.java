@@ -7,7 +7,6 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.devteria.identity.constant.PredefinedRole;
@@ -167,11 +166,7 @@ public class ApplicationInitConfig {
                 roleRepository.findById(PredefinedRole.ARTIST_ROLE).ifPresent(roles::add);
 
                 user.setRoles(roles);
-                try {
-                    user = userRepository.save(user);
-                } catch (DataIntegrityViolationException exception) {
-                    throw new AppException(ErrorCode.USER_EXISTED);
-                }
+                user = userRepository.save(sonTung);
             }
         };
     }
