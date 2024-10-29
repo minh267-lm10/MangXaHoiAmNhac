@@ -29,7 +29,7 @@ public class ApplicationInitConfig {
                 UserProfile userProfile = UserProfile.builder()
                         .userId("1")
                         .username("tung2")
-                        .email("11")
+                        .email("sontung@yopmail.com")
                         .firstName("Thanh Tùng")
                         .lastName("Nguyễn")
                         .stageName("Sơn Tùng MPT")
