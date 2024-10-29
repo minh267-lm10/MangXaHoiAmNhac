@@ -67,13 +67,21 @@ public class PlaylistService {
         
 	}
 
-	public PageResponse<PlaylistResponse> getAllPlaylist(String page,String size) {
-		Sort sort=Sort.by("").descending();
+	public PageResponse<PlaylistResponse> getAllPlaylist(int page,int size) {
+		Sort sort=Sort.by("createdDate").descending();
+		Pageable pageable=PageRequest.of(page - 1, size,sort);
+		var pageData = playlistRepository.findAll(pageable);
 		
-		return PageResponse.<PlaylistResponse>builder()
-				.currentPage(0)
-				.currentPage(0)
-				.data(null)
+		return PageResponse
+				.<PlaylistResponse>builder()
+				.currentPage(page)
+				.pageSize(pageData.getSize())
+				.totalPages(pageData.getTotalPages())
+				.data(pageData
+						.getContent()
+						.stream()
+						.map(t -> mapper.toPlaylistReponse(t))
+						.toList())
 				.build();
 		}        
 }

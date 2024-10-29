@@ -41,13 +41,11 @@ public class SongService {
 		return PageResponse
 				.<SongResponse>builder()
 				.currentPage(page)
-				.pageSize(pageData
-						.getSize())
-				.totalPages(pageData
-						.getTotalPages())
-				.totalElements(pageData
-						.getTotalElements())
-				.data(pageData.getContent()
+				.pageSize(pageData.getSize())
+				.totalPages(pageData.getTotalPages())
+				.totalElements(pageData.getTotalElements())
+				.data(pageData
+						.getContent()
 						.stream()
 						.map(t -> mapper
 								.toSongResponse(t))

@@ -28,7 +28,7 @@ public class UserProfile {
 
     String username;
     String email;
-
+    String stageName;
     String firstName;
     String lastName;
     LocalDate dob;

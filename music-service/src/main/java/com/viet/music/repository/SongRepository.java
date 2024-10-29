@@ -18,11 +18,11 @@ public interface SongRepository extends MongoRepository<Song, String> {
 
 	boolean existsByName(String name);
 
-	Page<Song> findAllByUserId(String userId, Pageable pageable);
+	Page<Song> findAllById(String userId, Pageable pageable);
 
 	Page<Song> findAll(Pageable pageable);
 
-	List<Song> findByArtistIDsContaining(String artistID);
+	List<Song> findByArtistIdsContaining(String artistId);
 
 	@Query("SELECT s FROM Song s WHERE :artistId MEMBER OF s.artistIds")
 	List<Song> findSongsByArtistId(@Param("artistId") String artistId);

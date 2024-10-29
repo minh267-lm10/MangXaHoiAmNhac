@@ -46,7 +46,7 @@ public class PlaylistController {
 	}
 	
 	@GetMapping
-	public ApiResponse<List<PlaylistResponse>> getAllPlaylist(
+	public ApiResponse<PageResponse<PlaylistResponse>> getAllPlaylist(
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
             @RequestParam(value = "size", required = false, defaultValue = "10") int size
             ) {
