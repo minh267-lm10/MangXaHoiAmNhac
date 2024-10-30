@@ -34,7 +34,7 @@ public class SongService {
 //    @PreAuthorize("hasRole('ADMIN')")
 	public PageResponse<SongResponse> getAllSongs(int page, int size) {
 
-		Sort sort = Sort.by("createdDate").descending();
+		Sort sort = Sort.by("name").ascending();
 		Pageable pageable = PageRequest.of(page - 1, size, sort);
 		var pageData = songRepository.findAll(pageable);
 

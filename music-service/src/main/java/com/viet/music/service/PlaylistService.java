@@ -63,7 +63,7 @@ public class PlaylistService {
 	}
 
 	public PageResponse<PlaylistResponse> getAllPlaylist(int page, int size) {
-		Sort sort = Sort.by("createdDate").descending();
+		Sort sort = Sort.by("name").ascending();
 		Pageable pageable = PageRequest.of(page - 1, size, sort);
 		var pageData = playlistRepository.findAll(pageable);
 
