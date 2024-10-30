@@ -80,7 +80,6 @@ public class PlaylistService {
 		playlist.setUserId(userId);
 		playlist = playlistRepository.save(playlist);
 
-		addSongs(playlist.getId(), playlist.getSongIds());
 
 		return mapper.toPlaylistReponse(playlist);
 	}
