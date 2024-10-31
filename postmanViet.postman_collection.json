@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "0ccff696-7040-4e03-996d-e8dccab6376a",
-		"name": "postmanViet",
+		"_postman_id": "401375b5-a605-4869-aa95-af2af0c1e2de",
+		"name": "postmanViet Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "39312366"
+		"_exporter_id": "29877640"
 	},
 	"item": [
 		{
@@ -230,7 +230,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"john2\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"username\": \"john99\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1095,7 +1095,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8888/api/v1/music/playlists",
+									"raw": "http://localhost:8888/api/v1/music/playlists?page=1&size=4",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1106,6 +1106,58 @@
 										"v1",
 										"music",
 										"playlists"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create playlist (gateway)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJiODA5ODgxNS0wNzhlLTQ1NTgtYjFhYi0yMGQyNDI1Mzc0MTQiLCJleHAiOjE3MzAyNDQ4NDgsImlhdCI6MTczMDIwODg0OCwianRpIjoiY2M2MDQ4MmYtMmE5YS00ZjI1LWIxMjctNGRjYzhhYjhlY2VkIiwic2NvcGUiOiJST0xFX0dVRVNUIGxpc3Rlbl9mcmVlX211c2ljIn0.yVgMloRNA3vhiyin2r2B-V5JTfGvlaYY-iJIbgfGlGCp0XtjK_DJW5i3hWqCu-H_M56pN7HtFZ8UOi29Atow7g",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Top Hits 2024\",\r\n  \"desc\": \"Collection of top hit songs in 2024\",\r\n  \"image\": \"data/img/anh1.jpg\",\r\n  \"songIds\": [\r\n    \"1\",\r\n    \"2\",\r\n    \"3\",\r\n    \"4\"\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8888/api/v1/music/playlists/createPlaylist",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8888",
+									"path": [
+										"api",
+										"v1",
+										"music",
+										"playlists",
+										"createPlaylist"
 									]
 								}
 							},
@@ -1113,6 +1165,9 @@
 						},
 						{
 							"name": "GetAllSongsInPlaylist",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -1126,8 +1181,17 @@
 								},
 								"method": "GET",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
-									"raw": "http://localhost:8888/api/v1/music/playlists/GetAllSongsInPlaylist/1",
+									"raw": "http://localhost:8888/api/v1/music/playlists/GetAllSongsInPlaylist/672206fc86c9c41beff84bc9",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1139,7 +1203,7 @@
 										"music",
 										"playlists",
 										"GetAllSongsInPlaylist",
-										"1"
+										"672206fc86c9c41beff84bc9"
 									]
 								}
 							},
@@ -1166,7 +1230,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8888/api/v1/music/songs?page=1&size=3",
+									"raw": "http://localhost:8888/api/v1/music/songs?page=3&size=4",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1181,11 +1245,11 @@
 									"query": [
 										{
 											"key": "page",
-											"value": "1"
+											"value": "3"
 										},
 										{
 											"key": "size",
-											"value": "3"
+											"value": "4"
 										}
 									]
 								}
@@ -1325,6 +1389,42 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "create Song (gateway) Copy",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"1\",\r\n  \"name\": \"SongName\",\r\n  \"title\": \"Title\",\r\n  \"album\": \"Album\",\r\n  \"duration\": 240,\r\n  \"desc\": \"Description\",\r\n  \"releaseDate\": \"2024-10-27\",\r\n  \"artistID\": [\"\", \"\"]\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8888/api/v1/music/songs/getSongsByArtistId/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8888",
+									"path": [
+										"api",
+										"v1",
+										"music",
+										"songs",
+										"getSongsByArtistId",
+										"1"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -1391,6 +1491,45 @@
 								"data",
 								"stream",
 								"anh1.jpg"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get  stream (gateway) Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJlY2I1NmI1Yy1mZTI1LTQ0NDctOWI1Yy1hMjdiNDk3MzFhYjYiLCJleHAiOjE3Mjk1MTk3OTksImlhdCI6MTcyOTUxNjE5OSwianRpIjoiY2EyZmY5MGEtMjc0Yi00MjkxLWEyMjMtNWNiMTA2OTQ4ODVlIiwic2NvcGUiOiJST0xFX0FETUlOIn0.D9Qhk3ybISPbNK9SvncuPCUBOjqsOH6a2O76eJjHa0hAVSjxH65E--PgyR2hBG-iyGiDy1D5AO5bUokuV3P0LA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/api/v1/music/data/getSongsByArtistId?file=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"music",
+								"data",
+								"getSongsByArtistId"
+							],
+							"query": [
+								{
+									"key": "file",
+									"value": ""
+								}
 							]
 						}
 					},
