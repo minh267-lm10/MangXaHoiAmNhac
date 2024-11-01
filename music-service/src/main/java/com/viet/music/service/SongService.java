@@ -86,7 +86,8 @@ public class SongService {
     }
 
     public List<SongResponse> getSongsByArtistId(String artistId) {
-        return songRepository.findSongsByArtistId(artistId).stream()
+
+        return songRepository.findByArtistIdsContaining(artistId).stream()
                 .map(t -> mapper.toSongResponse(t))
                 .toList();
     }

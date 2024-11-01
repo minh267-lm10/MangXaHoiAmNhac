@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "401375b5-a605-4869-aa95-af2af0c1e2de",
-		"name": "postmanViet Copy",
+		"name": "postmanViet",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "29877640"
 	},
@@ -197,7 +197,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"tung1\",\r\n    \"password\": \"123456\",\r\n    \"email\": \"john123@yopmail.com\",\r\n    \"firstName\": \"Thanh Tùng\",\r\n    \"lastName\": \"Nguyễn\",\r\n    \"stageName\":\"Sơn Tùng MPT\",\r\n    \"dob\": \"2000-04-08\",\r\n    \"city\" : \"London\"\r\n}",
+							"raw": "{\r\n    \"username\": \"john99\",\r\n    \"password\": \"123456\",\r\n    \"email\": \"john123@yopmail.com\",\r\n    \"firstName\": \"Jame4\",\r\n    \"lastName\": \"Bond\",\r\n    \"dob\": \"2000-04-08\",\r\n    \"city\" : \"London\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -230,7 +230,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"john99\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"username\": \"tung1\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -963,7 +963,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiI3ZGU1MDZhZi0zZDljLTQyODMtYTg1MS1kMGU3NDdjNDRhODkiLCJleHAiOjE3Mjk3NDczMzYsImlhdCI6MTcyOTc0MzczNiwianRpIjoiODY0MjY2ODMtM2ZlMC00YmU3LTgyNmItOTc4OGYyMDRmY2EzIiwic2NvcGUiOiJST0xFX0FkbWluIGxpc3Rlbl9wcmVtaXVtX211c2ljIG1hbmFnZV9hbGxfbXVzaWMgdXBsb2FkX211c2ljIG1hbmFnZV91c2VycyB2aWV3X3N0YXRpc3RpY3MgbGlzdGVuX2ZyZWVfbXVzaWMgbWFuYWdlX293bl9tdXNpYyBtYW5hZ2Vfc3Vic2NyaXB0aW9ucyJ9.dNb9J0Tp11xy-EhMU6Goi96wxcBVTl-rdAwRrWWPLMsG4uWZqlA4wFiHkqBDLFwJoZfriApPjifFoNGFmy7SNw",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiI0NjU0OWVmOS0xNDQ5LTRkZWEtOTM2NS0wMjdmYWJhOTFjOTgiLCJleHAiOjE3MzAzODU2ODQsImlhdCI6MTczMDM0OTY4NCwianRpIjoiOTJlOTg5MzItODMxYS00YTNiLWFmMjMtYmE2NTk1MDhjMTM1Iiwic2NvcGUiOiJST0xFX0FSVElTVCBsaXN0ZW5fZnJlZV9tdXNpYyB1cGxvYWRfbXVzaWMgbGlzdGVuX3ByZW1pdW1fbXVzaWMgdmlld19zdGF0aXN0aWNzIG1hbmFnZV9vd25fbXVzaWMifQ.Kq-8j_bHMCRXnUeGGN2KgTY3IhnP9hP8Rpap1KiDdUj_tpX2JxI6gvQW_O2VLbzxxOBHEYh5Tpf3tDBo3WOCfg",
 									"type": "string"
 								}
 							]
@@ -1391,11 +1391,21 @@
 							"response": []
 						},
 						{
-							"name": "create Song (gateway) Copy",
+							"name": "getSongsByArtistId(gateway)",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
 								"method": "GET",
 								"header": [],
 								"body": {
@@ -1408,7 +1418,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8888/api/v1/music/songs/getSongsByArtistId/1",
+									"raw": "http://localhost:8888/api/v1/music/songs/getSongsByArtistId/2",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1420,7 +1430,7 @@
 										"music",
 										"songs",
 										"getSongsByArtistId",
-										"1"
+										"2"
 									]
 								}
 							},
@@ -1491,45 +1501,6 @@
 								"data",
 								"stream",
 								"anh1.jpg"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get  stream (gateway) Copy",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJlY2I1NmI1Yy1mZTI1LTQ0NDctOWI1Yy1hMjdiNDk3MzFhYjYiLCJleHAiOjE3Mjk1MTk3OTksImlhdCI6MTcyOTUxNjE5OSwianRpIjoiY2EyZmY5MGEtMjc0Yi00MjkxLWEyMjMtNWNiMTA2OTQ4ODVlIiwic2NvcGUiOiJST0xFX0FETUlOIn0.D9Qhk3ybISPbNK9SvncuPCUBOjqsOH6a2O76eJjHa0hAVSjxH65E--PgyR2hBG-iyGiDy1D5AO5bUokuV3P0LA",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8888/api/v1/music/data/getSongsByArtistId?file=",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8888",
-							"path": [
-								"api",
-								"v1",
-								"music",
-								"data",
-								"getSongsByArtistId"
-							],
-							"query": [
-								{
-									"key": "file",
-									"value": ""
-								}
 							]
 						}
 					},

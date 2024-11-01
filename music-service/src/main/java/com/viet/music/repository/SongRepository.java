@@ -24,6 +24,6 @@ public interface SongRepository extends MongoRepository<Song, String> {
 
     List<Song> findByArtistIdsContaining(String artistId);
 
-    @Query("SELECT s FROM Song s WHERE :artistId MEMBER OF s.artistIds")
+    @Query("{ 'artistIds': ?0 }")
     List<Song> findSongsByArtistId(@Param("artistId") String artistId);
 }

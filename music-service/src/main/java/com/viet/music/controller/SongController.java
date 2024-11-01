@@ -67,7 +67,7 @@ public class SongController {
                 .build();
     }
 
-    @GetMapping("getSongsByArtistId/{id}")
+    @GetMapping("getSongsByArtistId/{artistId}")
     ApiResponse<List<SongResponse>> getSongsByArtistId(@PathVariable String artistId) {
         return ApiResponse.<List<SongResponse>>builder()
                 .result(songService.getSongsByArtistId(artistId))
