@@ -1,6 +1,5 @@
 package com.devteria.identity.configuration;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.boot.ApplicationRunner;
@@ -9,13 +8,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.devteria.identity.constant.PredefinedRole;
-import com.devteria.identity.dto.request.PermissionRequest;
-import com.devteria.identity.dto.request.RoleRequest;
+import com.devteria.identity.entity.Permission;
 import com.devteria.identity.entity.Role;
 import com.devteria.identity.entity.User;
-import com.devteria.identity.exception.AppException;
-import com.devteria.identity.exception.ErrorCode;
+import com.devteria.identity.repository.PermissionRepository;
 import com.devteria.identity.repository.RoleRepository;
 import com.devteria.identity.repository.UserRepository;
 import com.devteria.identity.service.PermissionService;
@@ -48,6 +44,7 @@ public class ApplicationInitConfig {
             value = "datasource.driverClassName",
             havingValue = "com.mysql.cj.jdbc.Driver")
     ApplicationRunner applicationRunner(
+            PermissionRepository permissionRepository,
             PermissionService permissionService,
             RoleRepository roleRepository,
             RoleService roleService,
@@ -55,118 +52,133 @@ public class ApplicationInitConfig {
             UserService userService) {
         return args -> {
             if (userRepository.findByUsername(ADMIN_USER_NAME).isEmpty()) {
-                permissionService.create(PermissionRequest.builder()
+                Permission listen_free_music = permissionRepository.save(Permission.builder()
                         .name("listen_free_music")
                         .description("Listen to free music")
                         .build());
-                permissionService.create(PermissionRequest.builder()
+                Permission listen_premium_music = permissionRepository.save(Permission.builder()
                         .name("listen_premium_music")
                         .description("Listen to premium music")
                         .build());
 
-                permissionService.create(PermissionRequest.builder()
+                Permission upload_music = permissionRepository.save(Permission.builder()
                         .name("upload_music")
                         .description("Upload new music to the system")
                         .build());
 
-                permissionService.create(PermissionRequest.builder()
+                Permission manage_own_music = permissionRepository.save(Permission.builder()
                         .name("manage_own_music")
                         .description("Manage the music uploaded by the user")
                         .build());
 
-                permissionService.create(PermissionRequest.builder()
+                Permission view_statistics = permissionRepository.save(Permission.builder()
                         .name("view_statistics")
                         .description("View listening statistics")
                         .build());
 
-                permissionService.create(PermissionRequest.builder()
+                Permission manage_users = permissionRepository.save(Permission.builder()
                         .name("manage_users")
                         .description("Manage users (add, edit, delete, suspend)")
                         .build());
 
-                permissionService.create(PermissionRequest.builder()
+                Permission manage_all_music = permissionRepository.save(Permission.builder()
                         .name("manage_all_music")
                         .description("Manage all music in the system")
                         .build());
 
-                permissionService.create(PermissionRequest.builder()
+                Permission manage_subscriptions = permissionRepository.save(Permission.builder()
                         .name("manage_subscriptions")
                         .description("Manage user subscription plans")
                         .build());
 
-                roleService.create(RoleRequest.builder()
+                Role GUEST = roleRepository.save(Role.builder()
                         .name("GUEST")
                         .description("Users with access to free music only")
-                        .permissions(Set.of("listen_free_music"))
+                        .permissions(Set.of(listen_free_music))
                         .build());
 
-                roleService.create(RoleRequest.builder()
+                Role SUBSCRIBER = roleRepository.save(Role.builder()
                         .name("SUBSCRIBER")
                         .description("Users with access to premium and free music")
-                        .permissions(Set.of("listen_free_music", "listen_premium_music"))
+                        .permissions(Set.of(listen_free_music, listen_premium_music))
                         .build());
 
-                roleService.create(RoleRequest.builder()
+                Role ARTIST = roleRepository.save(Role.builder()
                         .name("ARTIST")
                         .description("Artists who can upload and manage their own music")
                         .permissions(Set.of(
-                                "listen_free_music",
-                                "listen_premium_music",
-                                "upload_music",
-                                "manage_own_music",
-                                "view_statistics"))
+                                listen_free_music,
+                                listen_premium_music,
+                                upload_music,
+                                manage_own_music,
+                                view_statistics))
                         .build());
 
-                roleService.create(RoleRequest.builder()
+                Role ADMIN = roleRepository.save(Role.builder()
                         .name("ADMIN")
                         .description("Administrators with full access to the system")
                         .permissions(Set.of(
-                                "listen_free_music",
-                                "listen_premium_music",
-                                "upload_music",
-                                "manage_own_music",
-                                "view_statistics",
-                                "manage_users",
-                                "manage_all_music",
-                                "manage_subscriptions"))
+                                listen_free_music,
+                                listen_premium_music,
+                                upload_music,
+                                manage_own_music,
+                                view_statistics,
+                                manage_users,
+                                manage_all_music,
+                                manage_subscriptions))
                         .build());
 
-                User user = User.builder()
+                User user = userRepository.save(User.builder()
+                        .id("0")
                         .username(ADMIN_USER_NAME)
                         .emailVerified(true)
                         .password(passwordEncoder.encode(ADMIN_PASSWORD))
-                        .roles(Set.of(roleRepository
-                                .findById("ADMIN")
-                                .orElseThrow(() -> new AppException(ErrorCode.ROLE_NOT_EXISTED))))
-                        .build();
+                        .roles(Set.of(ADMIN))
+                        .build());
 
-                userRepository.save(user);
-                //
-                // userService.createArtist(UserCreationRequest.builder()
-                // .id("1")
-                // .username("tung2")
-                // .password("123456")
-                // .email("11")
-                // .firstName("Thanh Tùng")
-                // .lastName("Nguyễn")
-                // .stageName("Sơn Tùng MPT")
-                // .dob(LocalDate.of(1994, 7, 5))
-                // .city("vietnam")
-                // .build());
-
-                User sonTung = User.builder()
+                User sonTung = userRepository.save(User.builder()
                         .id("1")
                         .username("tung1")
                         .email("tung@yopmail.com")
-                        .emailVerified(false)
-                        .build();
-                sonTung.setPassword(passwordEncoder.encode("123456"));
-                HashSet<Role> roles = new HashSet<>();
+                        .emailVerified(true)
+                        .password(passwordEncoder.encode("123456"))
+                        .roles(Set.of(ARTIST))
+                        .build());
+                User phuongLy = userRepository.save(User.builder()
+                        .id("2")
+                        .username("phuongLy")
+                        .email("phuongly@yopmail.com")
+                        .emailVerified(true)
+                        .password(passwordEncoder.encode("123456"))
+                        .roles(Set.of(ARTIST))
+                        .build());
 
-                roleRepository.findById(PredefinedRole.ARTIST_ROLE).ifPresent(roles::add);
+                User bichPhuong = userRepository.save(User.builder()
+                        .id("3")
+                        .username("bichPhuong")
+                        .email("bichphuong@yopmail.com")
+                        .emailVerified(true)
+                        .password(passwordEncoder.encode("123456"))
+                        .roles(Set.of(ARTIST))
+                        .build());
 
-                sonTung.setRoles(roles);
-                userRepository.save(sonTung);
+                User justaTee = userRepository.save(User.builder()
+                        .id("4")
+                        .username("justaTee")
+                        .email("justatee@yopmail.com")
+                        .emailVerified(true)
+                        .password(passwordEncoder.encode("123456"))
+                        .roles(Set.of(ARTIST))
+                        .build());
+
+                User mrSiro = userRepository.save(User.builder()
+                        .id("5")
+                        .username("Mr.Siro")
+                        .email("mrsiro@yopmail.com")
+                        .emailVerified(true)
+                        .password(passwordEncoder.encode("123456"))
+                        .roles(Set.of(ARTIST))
+                        .build());
             }
         };
     }

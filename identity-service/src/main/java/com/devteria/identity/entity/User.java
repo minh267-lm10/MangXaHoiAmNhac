@@ -1,6 +1,7 @@
 package com.devteria.identity.entity;
 
 import java.util.Set;
+import java.util.UUID;
 
 import jakarta.persistence.*;
 
@@ -16,7 +17,7 @@ import lombok.experimental.FieldDefaults;
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    // @GeneratedValue(strategy = GenerationType.UUID)
     String id;
 
     @Column(name = "username", unique = true, columnDefinition = "VARCHAR(255) COLLATE utf8mb4_unicode_ci")
@@ -32,4 +33,11 @@ public class User {
 
     @ManyToMany
     Set<Role> roles;
+
+    @PrePersist
+    public void prePersist() {
+        if (id == null || id.isEmpty()) {
+            id = UUID.randomUUID().toString();
+        }
+    }
 }

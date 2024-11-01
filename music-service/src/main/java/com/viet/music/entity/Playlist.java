@@ -1,7 +1,6 @@
 package com.viet.music.entity;
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
@@ -18,11 +17,12 @@ import lombok.experimental.FieldDefaults;
 @Document(value = "playlist")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Playlist {
-	@MongoId
-	String id;
-	String name;
-	String desc;
-	String image;
-	String userId;
-	List<String> songIds; 
+    @MongoId
+    String id;
+
+    String name;
+    String desc;
+    String image;
+    String userId;
+    List<String> songIds;
 }

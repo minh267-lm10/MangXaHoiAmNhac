@@ -19,4 +19,5 @@ public class ProfileCreationRequest {
     String stageName;
     LocalDate dob;
     String city;
+    String img;
 }

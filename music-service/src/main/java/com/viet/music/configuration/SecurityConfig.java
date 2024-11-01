@@ -17,15 +17,13 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private static final String[] PUBLIC_ENDPOINTS = {
-
-    		  "/data/img/**", 
-    		  "/data/stream/**",
-    		  "/songs",
-    		  "/songs/**",
-    		  "/playlists",
-    		  "/playlists/**",
-    		  "/playlists/GetAllSongsInPlaylist/**"
-
+        "/data/img/**",
+        "/data/stream/**",
+        "/songs",
+        "/songs/**",
+        "/playlists",
+        "/playlists/**",
+        "/playlists/GetAllSongsInPlaylist/**"
     };
 
     private final CustomJwtDecoder customJwtDecoder;

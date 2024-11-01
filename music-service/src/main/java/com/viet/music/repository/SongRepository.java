@@ -14,16 +14,16 @@ import com.viet.music.entity.Song;
 
 @Repository
 public interface SongRepository extends MongoRepository<Song, String> {
-	Optional<Song> findByName(String name);
+    Optional<Song> findByName(String name);
 
-	boolean existsByName(String name);
+    boolean existsByName(String name);
 
-	Page<Song> findAllById(String userId, Pageable pageable);
+    Page<Song> findAllById(String userId, Pageable pageable);
 
-	Page<Song> findAll(Pageable pageable);
+    Page<Song> findAll(Pageable pageable);
 
-	List<Song> findByArtistIdsContaining(String artistId);
+    List<Song> findByArtistIdsContaining(String artistId);
 
-	@Query("SELECT s FROM Song s WHERE :artistId MEMBER OF s.artistIds")
-	List<Song> findSongsByArtistId(@Param("artistId") String artistId);
+    @Query("SELECT s FROM Song s WHERE :artistId MEMBER OF s.artistIds")
+    List<Song> findSongsByArtistId(@Param("artistId") String artistId);
 }

@@ -8,12 +8,12 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import com.viet.music.entity.Playlist;
-import com.viet.music.entity.Song;
 
 @Repository
-public interface PlaylistRepository extends MongoRepository<Playlist, String>{
-	 Optional<Playlist> findByName(String Name);
-	 boolean existsByName(String name);
-	 Page<Playlist> findAll(Pageable pageable);
-	 
+public interface PlaylistRepository extends MongoRepository<Playlist, String> {
+    Optional<Playlist> findByName(String Name);
+
+    boolean existsByName(String name);
+
+    Page<Playlist> findAll(Pageable pageable);
 }

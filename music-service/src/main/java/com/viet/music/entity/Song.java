@@ -20,17 +20,19 @@ import lombok.experimental.FieldDefaults;
 @Document(value = "song")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Song {
-	@MongoId
-	String id;
-	@Indexed(unique = true)
-	String name;
-	String title;
-	String album;
-	int duration; // duration in seconds
-	String file;
-	String image;
-	String desc;
-	LocalDate releaseDate;
-	List<String> artistIds;
-	Instant createdDate;
+    @MongoId
+    String id;
+
+    @Indexed(unique = true)
+    String name;
+
+    String title;
+    String album;
+    int duration; // duration in seconds
+    String file;
+    String image;
+    String desc;
+    LocalDate releaseDate;
+    List<String> artistIds;
+    Instant createdDate;
 }

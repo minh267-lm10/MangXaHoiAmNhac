@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Getter
 public enum ErrorCode {
-	 UNCATEGORIZED_EXCEPTION(9999, "Uncategorized error", HttpStatus.INTERNAL_SERVER_ERROR),
+    UNCATEGORIZED_EXCEPTION(9999, "Uncategorized error", HttpStatus.INTERNAL_SERVER_ERROR),
     INVALID_KEY(1101, "Uncategorized error", HttpStatus.BAD_REQUEST),
     RONG_HOAC_NULL(1102, "Có cái gì đó rỗng hoặc null -_-", HttpStatus.BAD_REQUEST),
     BAI_HAT_DA_TON_TAI(1103, "Bài hát đã tồn tại", HttpStatus.CONFLICT),

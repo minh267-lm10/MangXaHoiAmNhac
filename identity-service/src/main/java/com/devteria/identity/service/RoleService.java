@@ -26,7 +26,7 @@ public class RoleService {
     PermissionRepository permissionRepository;
     RoleMapper roleMapper;
 
-    //    @PreAuthorize("hasRole('ROLE_Admin')")
+    @PreAuthorize("hasRole('ROLE_Admin')")
     public RoleResponse create(RoleRequest request) {
         var role = roleMapper.toRole(request);
 

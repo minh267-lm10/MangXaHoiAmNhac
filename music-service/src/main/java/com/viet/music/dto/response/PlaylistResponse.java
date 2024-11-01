@@ -1,6 +1,5 @@
 package com.viet.music.dto.response;
 
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,10 +13,9 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PlaylistResponse {
-	String id;
-	String name;
-	String desc;
-	String image;
-	String userId;
-
+    String id;
+    String name;
+    String desc;
+    String image;
+    String userId;
 }
