@@ -173,7 +173,7 @@ public class ApplicationInitConfig {
 
                 User mrSiro = userRepository.save(User.builder()
                         .id("5")
-                        .username("Mr.Siro")
+                        .username("mrsiro")
                         .email("mrsiro@yopmail.com")
                         .emailVerified(true)
                         .password(passwordEncoder.encode("123456"))
