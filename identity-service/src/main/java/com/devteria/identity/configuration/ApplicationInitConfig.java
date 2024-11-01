@@ -138,7 +138,7 @@ public class ApplicationInitConfig {
 
                 User sonTung = userRepository.save(User.builder()
                         .id("1")
-                        .username("tung1")
+                        .username("sontung")
                         .email("tung@yopmail.com")
                         .emailVerified(true)
                         .password(passwordEncoder.encode("123456"))
