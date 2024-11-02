@@ -92,7 +92,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiI2MmUwZTQxMC1lN2Q3LTRlOGItOTQzMC1mMDdlNTkwOTQ3MzMiLCJleHAiOjE3MzAwMzMxODAsImlhdCI6MTcyOTk5NzE4MCwianRpIjoiODhkYThhMjYtYmM0My00MmYxLWEwOWMtNDk5YWVlYmQ3YTQyIiwic2NvcGUiOiJST0xFX0dVRVNUIGxpc3Rlbl9mcmVlX211c2ljIn0.-CqpOVXl652smtfqYZ1s5kJbtnz0FQC4mO4h30DDPyjDRicgOVZxYa6CTidFc5a9OAAu7q_riZUNiz1W9-qA5A",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiIyIiwiZXhwIjoxNzMwNTUwODY1LCJpYXQiOjE3MzA1MTQ4NjUsImp0aSI6ImI0NjlkZWViLTJkNGEtNDc1Mi1hZTVkLTNkMmE1ZTU0ODdmMyIsInNjb3BlIjoiUk9MRV9BUlRJU1QgbWFuYWdlX293bl9tdXNpYyBsaXN0ZW5fZnJlZV9tdXNpYyBsaXN0ZW5fcHJlbWl1bV9tdXNpYyB2aWV3X3N0YXRpc3RpY3MgdXBsb2FkX211c2ljIn0.yzxqLjQNN_mTRdsj8gEu_Ng143sVLD3xuvwlOTj3MZTfxa2dRpoDQdCV0GcR_9pLkG9k633Q9pHSaTlmdYx_MQ",
 									"type": "string"
 								}
 							]
@@ -197,7 +197,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"john99\",\r\n    \"password\": \"123456\",\r\n    \"email\": \"john123@yopmail.com\",\r\n    \"firstName\": \"Jame4\",\r\n    \"lastName\": \"Bond\",\r\n    \"dob\": \"2000-04-08\",\r\n    \"city\" : \"London\"\r\n}",
+							"raw": "{\r\n    \"username\": \"phungviet\",\r\n    \"password\": \"123456\",\r\n    \"email\": \"viet@yopmail.com\",\r\n    \"firstName\": \"Việt\",\r\n    \"lastName\": \"Phùng\",\r\n    \"stageName\": \"phung viet\",\r\n    \"dob\": \"2003-05-21\",\r\n    \"city\" : \"viet nam\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -230,7 +230,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"tung1\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "// {\r\n//     \"username\": \"admin\",\r\n//     \"password\": \"admin\"\r\n// }\r\n// {\r\n//     \"username\": \"sontung\",\r\n//     \"password\": \"123456\"\r\n// }\r\n{\r\n    \"username\": \"john99\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1044,7 +1044,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJlY2I1NmI1Yy1mZTI1LTQ0NDctOWI1Yy1hMjdiNDk3MzFhYjYiLCJleHAiOjE3Mjk1MTk3OTksImlhdCI6MTcyOTUxNjE5OSwianRpIjoiY2EyZmY5MGEtMjc0Yi00MjkxLWEyMjMtNWNiMTA2OTQ4ODVlIiwic2NvcGUiOiJST0xFX0FETUlOIn0.D9Qhk3ybISPbNK9SvncuPCUBOjqsOH6a2O76eJjHa0hAVSjxH65E--PgyR2hBG-iyGiDy1D5AO5bUokuV3P0LA",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiIwIiwiZXhwIjoxNzMwNTUxNTk5LCJpYXQiOjE3MzA1MTU1OTksImp0aSI6IjE0MDdiNjNjLWIzN2ItNDFlYi05NGE5LTgwMjA2YTlmMTI3MiIsInNjb3BlIjoiUk9MRV9BRE1JTiBtYW5hZ2Vfb3duX211c2ljIHVwbG9hZF9tdXNpYyBsaXN0ZW5fcHJlbWl1bV9tdXNpYyBtYW5hZ2VfdXNlcnMgbGlzdGVuX2ZyZWVfbXVzaWMgbWFuYWdlX3N1YnNjcmlwdGlvbnMgbWFuYWdlX2FsbF9tdXNpYyB2aWV3X3N0YXRpc3RpY3MifQ.Zmf8t3ih0vTkZ6RIvbVL4LFX_8at4amGnAc5hoViGZFPPsnEC3dBwVrRWhCUfsILUKVqXdFNZ4dBFLT7h3j5kA",
 											"type": "string"
 										}
 									]
@@ -1129,7 +1129,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJiODA5ODgxNS0wNzhlLTQ1NTgtYjFhYi0yMGQyNDI1Mzc0MTQiLCJleHAiOjE3MzAyNDQ4NDgsImlhdCI6MTczMDIwODg0OCwianRpIjoiY2M2MDQ4MmYtMmE5YS00ZjI1LWIxMjctNGRjYzhhYjhlY2VkIiwic2NvcGUiOiJST0xFX0dVRVNUIGxpc3Rlbl9mcmVlX211c2ljIn0.yVgMloRNA3vhiyin2r2B-V5JTfGvlaYY-iJIbgfGlGCp0XtjK_DJW5i3hWqCu-H_M56pN7HtFZ8UOi29Atow7g",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJhZGM1NzFlNi0zZjg3LTRmMjctYTNhNy02NDA3OGY2NjVmMjUiLCJleHAiOjE3MzA1NjM3MzgsImlhdCI6MTczMDUyNzczOCwianRpIjoiOTExMWRkZjQtYTBmYS00Zjk2LTg0ZDgtOTA5N2VmNGVmN2UxIiwic2NvcGUiOiJST0xFX0dVRVNUIGxpc3Rlbl9mcmVlX211c2ljIn0.yRCZDIJtwcEUxxS_-fYylaLshC9pfR4PtAENYx6d4lQ5H_IO5Ecrj0RDNXsgDrVQmGeSKunn7IXbZkR323f4Gg",
 											"type": "string"
 										}
 									]
@@ -1191,7 +1191,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8888/api/v1/music/playlists/GetAllSongsInPlaylist/672206fc86c9c41beff84bc9",
+									"raw": "http://localhost:8888/api/v1/music/playlists/GetAllSongsInPlaylist/2",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1203,7 +1203,50 @@
 										"music",
 										"playlists",
 										"GetAllSongsInPlaylist",
-										"672206fc86c9c41beff84bc9"
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getMyPlaylist",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiIwIiwiZXhwIjoxNzMwNTYzNjIwLCJpYXQiOjE3MzA1Mjc2MjAsImp0aSI6IjA1ODU1OTAzLTc5MzUtNDk3MC05MDNhLTVhNWNlMmNmMTNjMCIsInNjb3BlIjoiUk9MRV9BRE1JTiBtYW5hZ2VfYWxsX211c2ljIG1hbmFnZV9zdWJzY3JpcHRpb25zIGxpc3Rlbl9wcmVtaXVtX211c2ljIHVwbG9hZF9tdXNpYyBtYW5hZ2VfdXNlcnMgdmlld19zdGF0aXN0aWNzIGxpc3Rlbl9mcmVlX211c2ljIG1hbmFnZV9vd25fbXVzaWMifQ.76uvIH4awLGkpcAKh6KPvt478_raB9F2WMtB_8LF8nByxxsfLtP44iUtIt_Va5adC69sZJkyoOmm5W8QEQ3nFg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8888/api/v1/music/playlists/getMyPlaylist?page=2&size=3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8888",
+									"path": [
+										"api",
+										"v1",
+										"music",
+										"playlists",
+										"getMyPlaylist"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "2"
+										},
+										{
+											"key": "size",
+											"value": "3"
+										}
 									]
 								}
 							},
@@ -1431,6 +1474,47 @@
 										"songs",
 										"getSongsByArtistId",
 										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "seachSong(gateway)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"1\",\r\n  \"name\": \"SongName\",\r\n  \"title\": \"Title\",\r\n  \"album\": \"Album\",\r\n  \"duration\": 240,\r\n  \"desc\": \"Description\",\r\n  \"releaseDate\": \"2024-10-27\",\r\n  \"artistID\": [\"\", \"\"]\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8888/api/v1/music/songs/seachSong?name=thằ",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8888",
+									"path": [
+										"api",
+										"v1",
+										"music",
+										"songs",
+										"seachSong"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "thằ"
+										}
 									]
 								}
 							},
