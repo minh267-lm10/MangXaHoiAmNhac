@@ -24,20 +24,20 @@ public class PermissionService {
     PermissionRepository permissionRepository;
     PermissionMapper permissionMapper;
 
-    @PreAuthorize("hasRole('ROLE_Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
     public PermissionResponse create(PermissionRequest request) {
         Permission permission = permissionMapper.toPermission(request);
         permission = permissionRepository.save(permission);
         return permissionMapper.toPermissionResponse(permission);
     }
 
-    @PreAuthorize("hasRole('ROLE_Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<PermissionResponse> getAll() {
         var permissions = permissionRepository.findAll();
         return permissions.stream().map(permissionMapper::toPermissionResponse).toList();
     }
 
-    @PreAuthorize("hasRole('ROLE_Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
     public void delete(String permission) {
         permissionRepository.deleteById(permission);
     }

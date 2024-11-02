@@ -26,7 +26,8 @@ public class RoleService {
     PermissionRepository permissionRepository;
     RoleMapper roleMapper;
 
-    @PreAuthorize("hasRole('ROLE_Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
+    //  @PreAuthorize("hasAuthority('')")
     public RoleResponse create(RoleRequest request) {
         var role = roleMapper.toRole(request);
 
@@ -37,12 +38,14 @@ public class RoleService {
         return roleMapper.toRoleResponse(role);
     }
 
-    @PreAuthorize("hasRole('ROLE_Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
+    //  @PreAuthorize("hasAuthority('')")
     public List<RoleResponse> getAll() {
         return roleRepository.findAll().stream().map(roleMapper::toRoleResponse).toList();
     }
 
-    @PreAuthorize("hasRole('ROLE_Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
+    //  @PreAuthorize("hasAuthority('')")
     public void delete(String role) {
         roleRepository.deleteById(role);
     }

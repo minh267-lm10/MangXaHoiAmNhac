@@ -16,4 +16,6 @@ public interface PlaylistRepository extends MongoRepository<Playlist, String> {
     boolean existsByName(String name);
 
     Page<Playlist> findAll(Pageable pageable);
+
+    Page<Playlist> findByuserIdContaining(String artistId, Pageable pageable);
 }

@@ -67,10 +67,20 @@ public class SongController {
                 .build();
     }
 
-    @GetMapping("getSongsByArtistId/{artistId}")
+    @GetMapping("/getSongsByArtistId/{artistId}")
     ApiResponse<List<SongResponse>> getSongsByArtistId(@PathVariable String artistId) {
         return ApiResponse.<List<SongResponse>>builder()
                 .result(songService.getSongsByArtistId(artistId))
+                .build();
+    }
+
+    @GetMapping("/seachSong")
+    public ApiResponse<PageResponse<SongResponse>> seachSong(
+            @RequestParam String name,
+            @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
+        return ApiResponse.<PageResponse<SongResponse>>builder()
+                .result(songService.seachSong(name, page, size))
                 .build();
     }
 }

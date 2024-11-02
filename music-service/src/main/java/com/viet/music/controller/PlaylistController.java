@@ -60,4 +60,14 @@ public class PlaylistController {
                 .result(playlistService.getAllPlaylist(page, size))
                 .build();
     }
+
+    @GetMapping("getMyPlaylist")
+    public ApiResponse<PageResponse<PlaylistResponse>> getMyPlaylist(
+            @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
+
+        return ApiResponse.<PageResponse<PlaylistResponse>>builder()
+                .result(playlistService.getMyPlaylist(page, size))
+                .build();
+    }
 }

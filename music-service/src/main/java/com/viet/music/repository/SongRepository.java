@@ -26,4 +26,6 @@ public interface SongRepository extends MongoRepository<Song, String> {
 
     @Query("{ 'artistIds': ?0 }")
     List<Song> findSongsByArtistId(@Param("artistId") String artistId);
+
+    Page<Song> findByNameContainingIgnoreCase(String name, Pageable pageable);
 }

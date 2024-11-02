@@ -20,10 +20,9 @@ public class SecurityConfig {
         "/data/img/**",
         "/data/stream/**",
         "/songs",
-        "/songs/**",
         "/playlists",
-        "/playlists/**",
-        "/playlists/GetAllSongsInPlaylist/**"
+        "/playlists/GetAllSongsInPlaylist/**",
+        "/songs/seachSong"
     };
 
     private final CustomJwtDecoder customJwtDecoder;

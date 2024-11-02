@@ -7,6 +7,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.viet.music.dto.PageResponse;
@@ -30,9 +31,7 @@ public class SongService {
     SongMapper mapper;
     SongRepository songRepository;
 
-    //    @PreAuthorize("hasRole('ADMIN')")
     public PageResponse<SongResponse> getAllSongs(int page, int size) {
-
         Sort sort = Sort.by("name").ascending();
         Pageable pageable = PageRequest.of(page - 1, size, sort);
         var pageData = songRepository.findAll(pageable);
@@ -48,7 +47,23 @@ public class SongService {
                 .build();
     }
 
-    //    @PreAuthorize("hasRole('ADMIN')")
+    public PageResponse<SongResponse> seachSong(String name, int page, int size) {
+
+        Sort sort = Sort.by("name").ascending();
+        Pageable pageable = PageRequest.of(page - 1, size, sort);
+        var pageData = songRepository.findByNameContainingIgnoreCase(name, pageable);
+
+        return PageResponse.<SongResponse>builder()
+                .currentPage(page)
+                .pageSize(pageData.getSize())
+                .totalPages(pageData.getTotalPages())
+                .totalElements(pageData.getTotalElements())
+                .data(pageData.getContent().stream()
+                        .map(t -> mapper.toSongResponse(t))
+                        .toList())
+                .build();
+    }
+
     public SongResponse getSong(String id) {
         return songRepository
                 .findById(id)
@@ -56,11 +71,12 @@ public class SongService {
                 .orElseThrow(() -> new AppException(ErrorCode.KHONG_TON_TAI_BAI_HAT));
     }
 
-    //    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteSong(String songId) {
         songRepository.deleteById(songId);
     }
 
+    @PreAuthorize("hasAuthority('upload_music')")
     public SongResponse createSong(SongRequest request) {
         Song song = mapper.toSong(request);
         song.setCreatedDate(Instant.now());
@@ -74,7 +90,7 @@ public class SongService {
     }
 
     public List<SongResponse> getSongAllById(List<String> id) {
-        if (id == null || id.isEmpty()) {
+        if (id == null) {
             throw new AppException(ErrorCode.RONG_HOAC_NULL);
         }
         List<SongResponse> viet = songRepository.findAllById(id).stream()
@@ -86,7 +102,6 @@ public class SongService {
     }
 
     public List<SongResponse> getSongsByArtistId(String artistId) {
-
         return songRepository.findByArtistIdsContaining(artistId).stream()
                 .map(t -> mapper.toSongResponse(t))
                 .toList();

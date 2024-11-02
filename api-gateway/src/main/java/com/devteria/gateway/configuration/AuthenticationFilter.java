@@ -44,10 +44,10 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
 	  		"/music/data/img/.*",
 	  		"/music/data/stream/.*",
 	  		"/music/songs",
-	  		"/music/songs/.*",
 	  		"/music/playlists",
-	  		"/music/playlists/.*",
-	  		"/music/playlists/GetAllSongsInPlaylist/.*"
+	  		"/music/playlists/GetAllSongsInPlaylist/.*",
+	  		
+	        "/music/songs/seachSong"
     };
 
     @Value("${app.api-prefix}")
@@ -89,7 +89,7 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
 
     Mono<Void> unauthenticated(ServerHttpResponse response){
         ApiResponse<?> apiResponse = ApiResponse.builder()
-                .code(1401)
+                .code(8801)
                 .message("Unauthenticated")
                 .build();
 

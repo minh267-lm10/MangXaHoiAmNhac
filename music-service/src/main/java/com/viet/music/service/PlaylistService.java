@@ -51,7 +51,8 @@ public class PlaylistService {
         String userId = authentication.getName();
 
         if (userId.equals(playlist.getUserId())) {
-            Set<String> vietSet = new HashSet<>(playlist.getSongIds());
+            Set<String> vietSet =
+                    new HashSet<>(playlist.getSongIds() != null ? playlist.getSongIds() : new ArrayList<>());
             vietSet.addAll(id);
             playlist.setSongIds(new ArrayList<>(vietSet));
             playlist = playlistRepository.save(playlist);
@@ -65,6 +66,24 @@ public class PlaylistService {
         Sort sort = Sort.by("name").ascending();
         Pageable pageable = PageRequest.of(page - 1, size, sort);
         var pageData = playlistRepository.findAll(pageable);
+
+        return PageResponse.<PlaylistResponse>builder()
+                .currentPage(page)
+                .pageSize(pageData.getSize())
+                .totalPages(pageData.getTotalPages())
+                .data(pageData.getContent().stream()
+                        .map(t -> mapper.toPlaylistReponse(t))
+                        .toList())
+                .build();
+    }
+
+    public PageResponse<PlaylistResponse> getMyPlaylist(int page, int size) {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userId = authentication.getName();
+
+        Sort sort = Sort.by("name").ascending();
+        Pageable pageable = PageRequest.of(page - 1, size, sort);
+        var pageData = playlistRepository.findByuserIdContaining(userId, pageable);
 
         return PageResponse.<PlaylistResponse>builder()
                 .currentPage(page)
