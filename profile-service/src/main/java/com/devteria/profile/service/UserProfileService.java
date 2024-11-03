@@ -58,4 +58,10 @@ public class UserProfileService {
 
         return userProfileMapper.toUserProfileReponse(profile);
     }
+
+    public Boolean followUserOrUnfollowUser(String targetUserId) {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userId = authentication.getName();
+        return userProfileRepository.followUserOrUnfollowUser(userId, targetUserId);
+    }
 }
