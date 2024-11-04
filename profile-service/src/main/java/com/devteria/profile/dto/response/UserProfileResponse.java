@@ -21,4 +21,5 @@ public class UserProfileResponse {
     String city;
     String img;
     Boolean isFollowing;
+    String userId;
 }
