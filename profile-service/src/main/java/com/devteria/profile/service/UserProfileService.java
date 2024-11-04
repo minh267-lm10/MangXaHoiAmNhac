@@ -2,10 +2,13 @@ package com.devteria.profile.service;
 
 import java.util.List;
 
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.devteria.profile.dto.PageResponse;
 import com.devteria.profile.dto.request.ProfileCreationRequest;
 import com.devteria.profile.dto.response.UserProfileResponse;
 import com.devteria.profile.entity.UserProfile;
@@ -35,13 +38,17 @@ public class UserProfileService {
     }
 
     public UserProfileResponse getProfile(String id) {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userId = authentication.getName();
         UserProfile userProfile =
                 userProfileRepository.findById(id).orElseThrow(() -> new RuntimeException("Profile not found"));
 
-        return userProfileMapper.toUserProfileReponse(userProfile);
+        UserProfileResponse userProfileResponse = userProfileMapper.toUserProfileReponse(userProfile);
+        userProfileResponse.setIsFollowing(userProfileRepository.isFollowing(userId, id));
+        return userProfileResponse;
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //    @PreAuthorize("hasRole('ADMIN')")
     public List<UserProfileResponse> getAllProfiles() {
         var profiles = userProfileRepository.findAll();
 
@@ -63,5 +70,22 @@ public class UserProfileService {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = authentication.getName();
         return userProfileRepository.followUserOrUnfollowUser(userId, targetUserId);
+    }
+
+    public PageResponse<UserProfileResponse> seachStageName(String stageName, int page, int size) {
+
+        Sort sort = Sort.by("name").ascending();
+        Pageable pageable = PageRequest.of(page - 1, size, sort);
+        var pageData = userProfileRepository.findByStageNameContaining(stageName, pageable);
+
+        return PageResponse.<UserProfileResponse>builder()
+                .currentPage(page)
+                .pageSize(pageData.getSize())
+                .totalPages(pageData.getTotalPages())
+                .totalElements(pageData.getTotalElements())
+                .data(pageData.getContent().stream()
+                        .map(t -> userProfileMapper.toUserProfileReponse(t))
+                        .toList())
+                .build();
     }
 }

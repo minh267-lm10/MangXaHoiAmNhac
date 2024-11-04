@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "401375b5-a605-4869-aa95-af2af0c1e2de",
+		"_postman_id": "2a4187ea-ed21-4720-ae6c-f0f1db519f13",
 		"name": "postmanViet",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29877640"
+		"_exporter_id": "39312366"
 	},
 	"item": [
 		{
@@ -144,6 +144,106 @@
 								"v1",
 								"profile",
 								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "follow User Or Unfollow User(gateway)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiI5ZDgwNzA5Yy03NWJlLTQ4ODItYWJmMi0zZTg4Zjk3OTE5MjEiLCJleHAiOjE3MjkwODE1MjcsImlhdCI6MTcyOTA3NzkyNywianRpIjoiY2RkOTU2MDgtYzdlMC00OWM2LWExZjQtMDY3MzljMjM3OGI3Iiwic2NvcGUiOiJST0xFX0FETUlOIn0.soup1Za-giTeFsqQH2KoohPWtgQRHG4FMhFENj-M7_gwUoquGZcz6zLqbwsc5ovTk52xQXod_lUcIHtslr58UQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/api/v1/profile/users/followUserOrUnfollowUser?targetUserId=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"profile",
+								"users",
+								"followUserOrUnfollowUser"
+							],
+							"query": [
+								{
+									"key": "targetUserId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Seach Stage Name (gateway)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/api/v1/profile/users/seachStageName?stageName=v&page=1&size=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"profile",
+								"users",
+								"seachStageName"
+							],
+							"query": [
+								{
+									"key": "stageName",
+									"value": "v"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
 							]
 						}
 					},

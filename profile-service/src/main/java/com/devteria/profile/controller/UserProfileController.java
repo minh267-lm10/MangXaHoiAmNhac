@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devteria.profile.dto.ApiResponse;
+import com.devteria.profile.dto.PageResponse;
 import com.devteria.profile.dto.response.UserProfileResponse;
-import com.devteria.profile.exception.AppException;
-import com.devteria.profile.exception.ErrorCode;
 import com.devteria.profile.service.UserProfileService;
 
 import lombok.AccessLevel;
@@ -44,14 +44,20 @@ public class UserProfileController {
                 .build();
     }
 
-    @GetMapping("/users/followUserOrUnfollowUser")
-    ApiResponse<Void> followUserOrUnfollowUser(@RequestParam String targetUserId) {
-        if (userProfileService.followUserOrUnfollowUser(targetUserId) == null) throw new AppException(ErrorCode.NULL);
-        if (userProfileService.followUserOrUnfollowUser(targetUserId))
-            return ApiResponse.<Void>builder().message("Đã theo dõi người dùng").build();
-        else
-            return ApiResponse.<Void>builder()
-                    .message("Đã bỏ theo dõi người dùng")
-                    .build();
+    @PostMapping("/users/followUserOrUnfollowUser")
+    ApiResponse<Boolean> followUserOrUnfollowUser(@RequestParam String targetUserId) {
+        return ApiResponse.<Boolean>builder()
+                .result(userProfileService.followUserOrUnfollowUser(targetUserId))
+                .build();
+    }
+
+    @GetMapping("/users/seachStageName")
+    ApiResponse<PageResponse<UserProfileResponse>> seachStageName(
+            @RequestParam String stageName,
+            @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
+        return ApiResponse.<PageResponse<UserProfileResponse>>builder()
+                .result(userProfileService.seachStageName(stageName, page, size))
+                .build();
     }
 }
