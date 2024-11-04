@@ -43,9 +43,10 @@ public interface UserProfileRepository extends Neo4jRepository<UserProfile, Stri
      * @param targetUserId  ID của người dùng mục tiêu.
      * @return true nếu đang theo dõi, false nếu không.
      */
-    @Query("MATCH (u:UserProfile {userId: $userId})-[:FOLLOWS]->(t:UserProfile {userId: $targetUserId}) "
-            + "RETURN COUNT(t) > 0")
+    @Query("RETURN EXISTS((:UserProfile {userId: $userId})-[:FOLLOWS]->(:UserProfile {userId: $targetUserId}))")
     Boolean isFollowing(String userId, String targetUserId);
 
-    Page<UserProfile> findByStageNameContaining(String StageName, Pageable pageable);
+    Page<UserProfile> findByStageNameStartingWithIgnoreCase(String StageName, Pageable pageable);
+
+    Page<UserProfile> findByStageNameContainingIgnoreCase(String stageName, Pageable pageable);
 }

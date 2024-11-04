@@ -18,6 +18,7 @@ public enum ErrorCode {
     INVALID_DOB(2008, "Your age must be at least {min}", HttpStatus.BAD_REQUEST),
     THANH_CONG(1000, "Thành công", HttpStatus.OK),
     NULL(2009, "Có thứ gì đó null", HttpStatus.BAD_REQUEST),
+    KHONG_TIM_THAY_PROFILE(20010, "Không tìm thấy profile", HttpStatus.NOT_FOUND),
     ;
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {

@@ -40,10 +40,13 @@ public class UserProfileService {
     public UserProfileResponse getProfile(String id) {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = authentication.getName();
-        UserProfile userProfile =
-                userProfileRepository.findById(id).orElseThrow(() -> new RuntimeException("Profile not found"));
+
+        UserProfile userProfile = userProfileRepository
+                .findByUserId(id)
+                .orElseThrow(() -> new AppException(ErrorCode.KHONG_TIM_THAY_PROFILE));
 
         UserProfileResponse userProfileResponse = userProfileMapper.toUserProfileReponse(userProfile);
+
         userProfileResponse.setIsFollowing(userProfileRepository.isFollowing(userId, id));
         return userProfileResponse;
     }
@@ -74,9 +77,9 @@ public class UserProfileService {
 
     public PageResponse<UserProfileResponse> seachStageName(String stageName, int page, int size) {
 
-        Sort sort = Sort.by("name").ascending();
+        Sort sort = Sort.by("stageName").ascending();
         Pageable pageable = PageRequest.of(page - 1, size, sort);
-        var pageData = userProfileRepository.findByStageNameContaining(stageName, pageable);
+        var pageData = userProfileRepository.findByStageNameContainingIgnoreCase(stageName, pageable);
 
         return PageResponse.<UserProfileResponse>builder()
                 .currentPage(page)
