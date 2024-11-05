@@ -72,7 +72,11 @@ public class UserProfileService {
     public Boolean followUserOrUnfollowUser(String targetUserId) {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = authentication.getName();
-        return userProfileRepository.followUserOrUnfollowUser(userId, targetUserId);
+        if (userProfileRepository.followUserOrUnfollowUser(userId, targetUserId) != null) {
+            return userProfileRepository.followUserOrUnfollowUser(userId, targetUserId);
+        } else {
+            throw new AppException(ErrorCode.NULL);
+        }
     }
 
     public PageResponse<UserProfileResponse> seachStageName(String stageName, int page, int size) {

@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
@@ -21,6 +24,8 @@ public class Post {
     String userId;
     String content;
     String img;
+    @CreatedDate
     Instant createdDate;
+    @LastModifiedDate
     Instant modifiedDate;
 }

@@ -1,7 +1,10 @@
 package com.viet.music.entity;
 
+import java.time.Instant;
 import java.util.List;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
@@ -25,4 +28,10 @@ public class Playlist {
     String image;
     String userId;
     List<String> songIds;
+
+    @CreatedDate
+    Instant createdDate;
+
+    @LastModifiedDate
+    Instant modifiedDate;
 }
