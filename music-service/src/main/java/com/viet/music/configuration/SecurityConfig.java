@@ -22,7 +22,8 @@ public class SecurityConfig {
         "/songs",
         "/playlists",
         "/playlists/GetAllSongsInPlaylist/**",
-        "/songs/seachSong"
+        "/songs/seachSong",
+        "songs/getSongsByArtistId/**"
     };
 
     private final CustomJwtDecoder customJwtDecoder;

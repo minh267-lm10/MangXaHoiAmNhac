@@ -22,4 +22,5 @@ public class UserProfileResponse {
     String img;
     Boolean isFollowing;
     String userId;
+    Long numberOfFollowers;
 }

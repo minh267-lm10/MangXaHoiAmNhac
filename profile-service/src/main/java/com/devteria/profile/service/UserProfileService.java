@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -38,24 +39,45 @@ public class UserProfileService {
     }
 
     public UserProfileResponse getProfile(String id) {
-        var authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userId = authentication.getName();
 
         UserProfile userProfile = userProfileRepository
                 .findByUserId(id)
                 .orElseThrow(() -> new AppException(ErrorCode.KHONG_TIM_THAY_PROFILE));
-
         UserProfileResponse userProfileResponse = userProfileMapper.toUserProfileReponse(userProfile);
+        userProfileResponse.setNumberOfFollowers(userProfileRepository.countFollowers(id));
 
-        userProfileResponse.setIsFollowing(userProfileRepository.isFollowing(userId, id));
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && !(authentication instanceof AnonymousAuthenticationToken)) {
+            String userId = authentication.getName();
+            userProfileResponse.setIsFollowing(userProfileRepository.isFollowing(userId, id));
+        } else userProfileResponse.setIsFollowing(null);
+
         return userProfileResponse;
     }
 
-    //    @PreAuthorize("hasRole('ADMIN')")
+    // @PreAuthorize("hasRole('ADMIN')")
     public List<UserProfileResponse> getAllProfiles() {
         var profiles = userProfileRepository.findAll();
 
-        return profiles.stream().map(userProfileMapper::toUserProfileReponse).toList();
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && !(authentication instanceof AnonymousAuthenticationToken)) {
+            String myUserId = authentication.getName();
+            return profiles.stream()
+                    .map(t -> {
+                        UserProfileResponse userProfileResponse = userProfileMapper.toUserProfileReponse(t);
+                        userProfileResponse.setIsFollowing(userProfileRepository.isFollowing(myUserId, t.getUserId()));
+                        userProfileResponse.setNumberOfFollowers(userProfileRepository.countFollowers(t.getUserId()));
+                        return userProfileResponse;
+                    })
+                    .toList();
+        } else
+            return profiles.stream()
+                    .map(t -> {
+                        UserProfileResponse userProfileResponse = userProfileMapper.toUserProfileReponse(t);
+                        userProfileResponse.setNumberOfFollowers(userProfileRepository.countFollowers(t.getUserId()));
+                        return userProfileResponse;
+                    })
+                    .toList();
     }
 
     public UserProfileResponse getMyProfile() {
@@ -72,11 +94,7 @@ public class UserProfileService {
     public Boolean followUserOrUnfollowUser(String targetUserId) {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = authentication.getName();
-        if (userProfileRepository.followUserOrUnfollowUser(userId, targetUserId) != null) {
-            return userProfileRepository.followUserOrUnfollowUser(userId, targetUserId);
-        } else {
-            throw new AppException(ErrorCode.NULL);
-        }
+        return userProfileRepository.followUserOrUnfollowUser(userId, targetUserId);
     }
 
     public PageResponse<UserProfileResponse> seachStageName(String stageName, int page, int size) {
@@ -85,14 +103,39 @@ public class UserProfileService {
         Pageable pageable = PageRequest.of(page - 1, size, sort);
         var pageData = userProfileRepository.findByStageNameContainingIgnoreCase(stageName, pageable);
 
-        return PageResponse.<UserProfileResponse>builder()
-                .currentPage(page)
-                .pageSize(pageData.getSize())
-                .totalPages(pageData.getTotalPages())
-                .totalElements(pageData.getTotalElements())
-                .data(pageData.getContent().stream()
-                        .map(t -> userProfileMapper.toUserProfileReponse(t))
-                        .toList())
-                .build();
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && !(authentication instanceof AnonymousAuthenticationToken)) {
+            String myUserId = authentication.getName();
+            return PageResponse.<UserProfileResponse>builder()
+                    .currentPage(page)
+                    .pageSize(pageData.getSize())
+                    .totalPages(pageData.getTotalPages())
+                    .totalElements(pageData.getTotalElements())
+                    .data(pageData.getContent().stream()
+                            .map(t -> {
+                                UserProfileResponse userProfileResponse = userProfileMapper.toUserProfileReponse(t);
+                                userProfileResponse.setIsFollowing(
+                                        userProfileRepository.isFollowing(myUserId, t.getUserId()));
+                                userProfileResponse.setNumberOfFollowers(
+                                        userProfileRepository.countFollowers(t.getUserId()));
+                                return userProfileResponse;
+                            })
+                            .toList())
+                    .build();
+        } else
+            return PageResponse.<UserProfileResponse>builder()
+                    .currentPage(page)
+                    .pageSize(pageData.getSize())
+                    .totalPages(pageData.getTotalPages())
+                    .totalElements(pageData.getTotalElements())
+                    .data(pageData.getContent().stream()
+                            .map(t -> {
+                                UserProfileResponse userProfileResponse = userProfileMapper.toUserProfileReponse(t);
+                                userProfileResponse.setNumberOfFollowers(
+                                        userProfileRepository.countFollowers(t.getUserId()));
+                                return userProfileResponse;
+                            })
+                            .toList())
+                    .build();
     }
 }

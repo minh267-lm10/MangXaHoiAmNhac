@@ -49,4 +49,8 @@ public interface UserProfileRepository extends Neo4jRepository<UserProfile, Stri
     Page<UserProfile> findByStageNameStartingWithIgnoreCase(String StageName, Pageable pageable);
 
     Page<UserProfile> findByStageNameContainingIgnoreCase(String stageName, Pageable pageable);
+
+    // Truy vấn số lượt follow
+    @Query("MATCH (u:UserProfile)-[f:FOLLOWS]->(i:UserProfile) WHERE i.userId = $userId  RETURN count(f)")
+    long countFollowers(String userId);
 }
