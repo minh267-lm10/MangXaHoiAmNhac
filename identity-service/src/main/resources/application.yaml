@@ -20,6 +20,11 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+outbound:
+  identity:
+    client-id: "<clientId>"
+    client-secret: "<clientSecret>"
+    redirect-uri: "http://localhost:3000/authenticate"
 jwt:
   signerKey: "1TjXchw5FloESb63Kc+DFhTARvpWL4jUGCwfGWxuG5SIf/1y/LgJxHnMqaF6A/ij"
   valid-duration: 36000 # in second
