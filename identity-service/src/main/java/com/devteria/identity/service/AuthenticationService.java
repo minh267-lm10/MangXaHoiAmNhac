@@ -5,11 +5,11 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.StringJoiner;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,6 +21,7 @@ import com.devteria.identity.dto.request.ExchangeTokenRequest;
 import com.devteria.identity.dto.request.IntrospectRequest;
 import com.devteria.identity.dto.request.LogoutRequest;
 import com.devteria.identity.dto.request.RefreshRequest;
+import com.devteria.identity.dto.request.UserCreationRequest;
 import com.devteria.identity.dto.response.AuthenticationResponse;
 import com.devteria.identity.dto.response.IntrospectResponse;
 import com.devteria.identity.entity.InvalidatedToken;
@@ -28,10 +29,14 @@ import com.devteria.identity.entity.Role;
 import com.devteria.identity.entity.User;
 import com.devteria.identity.exception.AppException;
 import com.devteria.identity.exception.ErrorCode;
+import com.devteria.identity.mapper.ProfileMapper;
+import com.devteria.identity.mapper.UserMapper;
 import com.devteria.identity.repository.InvalidatedTokenRepository;
+import com.devteria.identity.repository.RoleRepository;
 import com.devteria.identity.repository.UserRepository;
 import com.devteria.identity.repository.httpclient.OutboundIdentityClient;
 import com.devteria.identity.repository.httpclient.OutboundUserClient;
+import com.devteria.identity.repository.httpclient.ProfileClient;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
@@ -50,10 +55,13 @@ import lombok.extern.slf4j.Slf4j;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class AuthenticationService {
     UserRepository userRepository;
-    UserService userService;
+    RoleRepository roleRepository;
     InvalidatedTokenRepository invalidatedTokenRepository;
     OutboundIdentityClient outboundIdentityClient;
     OutboundUserClient outboundUserClient;
+    UserMapper userMapper;
+    ProfileMapper profileMapper;
+    ProfileClient profileClient;
 
     @NonFinal
     @Value("${jwt.signerKey}")
@@ -111,12 +119,31 @@ public class AuthenticationService {
 
         log.info("User Info {}", userInfo);
 
-        Set<Role> roles = new HashSet<>();
-        roles.add(Role.builder().name(PredefinedRole.GUEST_ROLE).build());
+        UserCreationRequest userCreationRequest = UserCreationRequest.builder()
+                .username(userInfo.getEmail())
+                .email(userInfo.getEmail())
+                .firstName(userInfo.getGivenName())
+                .lastName(userInfo.getFamilyName())
+                .city(userInfo.getLocale())
+                .img(userInfo.getPicture())
+                .build();
+        User user = userMapper.toUser(userCreationRequest);
+        HashSet<Role> roles = new HashSet<>();
 
-        // Onboard user
-        var user = userRepository.findByUsername(userInfo.getEmail()).orElseGet(() -> userService.createGuest(null));
+        roleRepository.findById(PredefinedRole.GUEST_ROLE).ifPresent(roles::add);
 
+        user.setRoles(roles);
+        user.setEmailVerified(false);
+
+        try {
+            user = userRepository.save(user);
+        } catch (DataIntegrityViolationException exception) {
+            throw new AppException(ErrorCode.USER_EXISTED);
+        }
+
+        var profileRequest = profileMapper.toProfileCreationRequest(userCreationRequest);
+
+        profileClient.createProfile(profileRequest);
         // Generate token
         var token = generateToken(user);
 

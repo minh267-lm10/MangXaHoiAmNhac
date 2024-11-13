@@ -36,4 +36,5 @@ public class UserCreationRequest {
     LocalDate dob;
 
     String city;
+    String img;
 }

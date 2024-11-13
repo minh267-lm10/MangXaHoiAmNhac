@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.devteria.identity.configuration.AuthenticationRequestInterceptor;
-import com.devteria.identity.dto.request.ApiResponse;
+import com.devteria.identity.dto.ApiResponse;
 import com.devteria.identity.dto.request.ProfileCreationRequest;
 import com.devteria.identity.dto.response.UserProfileResponse;
 

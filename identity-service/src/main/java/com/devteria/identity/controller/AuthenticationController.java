@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.devteria.identity.dto.ApiResponse;
 import com.devteria.identity.dto.request.*;
 import com.devteria.identity.dto.response.AuthenticationResponse;
 import com.devteria.identity.dto.response.IntrospectResponse;
