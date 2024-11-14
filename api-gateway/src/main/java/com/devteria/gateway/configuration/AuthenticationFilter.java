@@ -53,7 +53,8 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
 	        "/profile/users/.*",
 	        "/music/songs/getSongsByArtistId/.*",
 	        
-	        "profile/users/seachStageName"
+	        "profile/users/seachStageName",
+	       "/identity/auth/outbound/authentication"
     };
 
     @Value("${app.api-prefix}")

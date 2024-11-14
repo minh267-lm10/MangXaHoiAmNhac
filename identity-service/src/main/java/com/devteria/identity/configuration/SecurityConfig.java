@@ -19,7 +19,13 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private static final String[] PUBLIC_ENDPOINTS_POST = {
-        "/users/registration/**", "/auth/token", "/auth/introspect", "/auth/logout", "/auth/refresh", "/"
+        "/users/registration/**",
+        "/auth/token",
+        "/auth/introspect",
+        "/auth/logout",
+        "/auth/refresh",
+        "/",
+        "auth/outbound/authentication"
     };
     private static final String[] PUBLIC_ENDPOINTS_GET = {};
 

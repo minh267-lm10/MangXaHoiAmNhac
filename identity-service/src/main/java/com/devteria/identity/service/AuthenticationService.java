@@ -118,32 +118,35 @@ public class AuthenticationService {
         var userInfo = outboundUserClient.getUserInfo("json", response.getAccessToken());
 
         log.info("User Info {}", userInfo);
+        if (true) {}
 
-        UserCreationRequest userCreationRequest = UserCreationRequest.builder()
-                .username(userInfo.getEmail())
-                .email(userInfo.getEmail())
-                .firstName(userInfo.getGivenName())
-                .lastName(userInfo.getFamilyName())
-                .city(userInfo.getLocale())
-                .img(userInfo.getPicture())
-                .build();
-        User user = userMapper.toUser(userCreationRequest);
-        HashSet<Role> roles = new HashSet<>();
+        var user = userRepository.findByUsername(userInfo.getEmail()).orElseGet(() -> {
+            // tạo user
+            UserCreationRequest userCreationRequest = UserCreationRequest.builder()
+                    .username(userInfo.getEmail())
+                    .email(userInfo.getEmail())
+                    .firstName(userInfo.getGivenName())
+                    .lastName(userInfo.getFamilyName())
+                    .city(userInfo.getLocale())
+                    .img(userInfo.getPicture())
+                    .build();
+            User user2 = userMapper.toUser(userCreationRequest);
+            HashSet<Role> roles = new HashSet<>();
+            roleRepository.findById(PredefinedRole.GUEST_ROLE).ifPresent(t -> roles.add(t));
+            user2.setRoles(roles);
+            user2.setEmailVerified(true);
+            try {
+                user2 = userRepository.save(user2);
 
-        roleRepository.findById(PredefinedRole.GUEST_ROLE).ifPresent(roles::add);
+                var profileRequest = profileMapper.toProfileCreationRequest(userCreationRequest);
+                profileRequest.setUserId(user2.getId());
+                profileClient.createProfile(profileRequest);
+            } catch (DataIntegrityViolationException exception) {
+                throw new AppException(ErrorCode.USER_EXISTED);
+            }
+            return user2;
+        });
 
-        user.setRoles(roles);
-        user.setEmailVerified(false);
-
-        try {
-            user = userRepository.save(user);
-        } catch (DataIntegrityViolationException exception) {
-            throw new AppException(ErrorCode.USER_EXISTED);
-        }
-
-        var profileRequest = profileMapper.toProfileCreationRequest(userCreationRequest);
-
-        profileClient.createProfile(profileRequest);
         // Generate token
         var token = generateToken(user);
 

@@ -35,6 +35,7 @@ public class ApplicationInitConfig {
                         .stageName("Sơn Tùng MPT")
                         .dob(LocalDate.of(1994, 7, 5))
                         .city("vietnam")
+                        .img("http://localhost:8888/api/v1/music/data/img/son_tung_6-160862605540810660.jpg")
                         .build());
 
                 UserProfile phuongLy = userProfileRepository.save(UserProfile.builder()
@@ -46,7 +47,8 @@ public class ApplicationInitConfig {
                         .stageName("Phương Ly")
                         .dob(LocalDate.of(1990, 10, 28))
                         .city("vietnam")
-                        .img("/data/img/222214_phuonglytrolaigoicamtruongthanhvoiamnhac1206.jpeg")
+                        .img(
+                                "http://localhost:8888/api/v1/music/data/img/222214_phuonglytrolaigoicamtruongthanhvoiamnhac1206.jpeg")
                         .build());
 
                 UserProfile bichPhuong = userProfileRepository.save(UserProfile.builder()
@@ -58,7 +60,8 @@ public class ApplicationInitConfig {
                         .stageName("Bích Phương")
                         .dob(LocalDate.of(1989, 9, 30))
                         .city("vietnam")
-                        .img("/data/img/bich_phuong.7ab4f334-5994-461d-9e58-4dbfb763c619.png")
+                        .img(
+                                "http://localhost:8888/api/v1/music/data/img/bich_phuong.7ab4f334-5994-461d-9e58-4dbfb763c619.png")
                         .build());
 
                 UserProfile justaTee = userProfileRepository.save(UserProfile.builder()
@@ -70,7 +73,7 @@ public class ApplicationInitConfig {
                         .stageName("JustaTee")
                         .dob(LocalDate.of(1990, 11, 1))
                         .city("vietnam")
-                        .img("/data/img/JustaTee.1453715057717.jpg")
+                        .img("http://localhost:8888/api/v1/music/data/img/JustaTee.1453715057717.jpg")
                         .build());
 
                 UserProfile mrSiro = userProfileRepository.save(UserProfile.builder()
@@ -82,7 +85,7 @@ public class ApplicationInitConfig {
                         .stageName("Mr.Siro")
                         .dob(LocalDate.of(1982, 11, 18))
                         .city("vietnam")
-                        .img("/data/img/Mr.Siro.1505103180911.jpg")
+                        .img("http://localhost:8888/api/v1/music/data/img/Mr.Siro.1505103180911.jpg")
                         .build());
             }
         };
