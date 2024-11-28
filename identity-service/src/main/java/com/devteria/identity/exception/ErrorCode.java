@@ -19,6 +19,8 @@ public enum ErrorCode {
     INVALID_EMAIL(1009, "Invalid email address", HttpStatus.BAD_REQUEST),
     EMAIL_IS_REQUIRED(1009, "Email is required", HttpStatus.BAD_REQUEST),
     ROLE_NOT_EXISTED(1010, "Role not existed|Vai trò không tồn tại", HttpStatus.NOT_FOUND),
+    NOT_NULL_USERNAME(1011, "Username is required", HttpStatus.BAD_REQUEST),
+    NOT_NULL_PASSWORD(1012, "Password is required", HttpStatus.BAD_REQUEST),
     ;
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {

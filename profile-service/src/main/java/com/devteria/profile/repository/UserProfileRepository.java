@@ -1,5 +1,6 @@
 package com.devteria.profile.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -53,4 +54,8 @@ public interface UserProfileRepository extends Neo4jRepository<UserProfile, Stri
     // Truy vấn số lượt follow
     @Query("MATCH (u:UserProfile)-[f:FOLLOWS]->(i:UserProfile) WHERE i.userId = $userId  RETURN count(f)")
     long countFollowers(String userId);
+
+    //Truy vấn dánh sách id người dùng đang theo dõi
+    @Query("MATCH (u:UserProfile)-[f:FOLLOWS]->(i:UserProfile) WHERE u.userId = $userId  RETURN i.userId")
+    List<String> findUserIdsFollowing(String userId);
 }

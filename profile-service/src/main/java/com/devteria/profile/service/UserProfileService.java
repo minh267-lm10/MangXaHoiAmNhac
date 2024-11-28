@@ -138,4 +138,8 @@ public class UserProfileService {
                             .toList())
                     .build();
     }
+
+    public List<String> getUserIdsFollowing(String userId) {
+        return userProfileRepository.findUserIdsFollowing(userId);
+    }
 }

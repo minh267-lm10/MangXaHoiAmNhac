@@ -41,20 +41,22 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
             "/identity/auth/.*",
             "/identity/users/registration/.*",
             "/notification/email/send",
-	  		"/music/data/img/.*",
-	  		"/music/data/stream/.*",
-	  		"/music/songs",
-	  		"/music/playlists",
-	  		"/music/playlists/GetAllSongsInPlaylist/.*",
-	  		
-	        "/music/songs/seachSong",
-	        "/profile/users",
-	        
-	        "/profile/users/.*",
-	        "/music/songs/getSongsByArtistId/.*",
-	        
-	        "profile/users/seachStageName",
-	       "/identity/auth/outbound/authentication"
+            "/music/data/img/.*",
+            "/music/data/stream/.*",
+            "/music/songs",
+            "/music/playlists",
+            "/music/playlists/GetAllSongsInPlaylist/.*",
+
+            "/music/songs/seachSong",
+            "/profile/users",
+
+            "/profile/users/.*",
+            "/music/songs/getSongsByArtistId/.*",
+
+            "/profile/users/seachStageName",
+            "/identity/auth/outbound/authentication",
+
+            "/profile/internal/users/getUserIdsFollowing",
     };
 
     @Value("${app.api-prefix}")
@@ -89,12 +91,12 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
         return -1;
     }
 
-    private boolean isPublicEndpoint(ServerHttpRequest request){
+    private boolean isPublicEndpoint(ServerHttpRequest request) {
         return Arrays.stream(publicEndpoints)
                 .anyMatch(s -> request.getURI().getPath().matches(apiPrefix + s));
     }
 
-    Mono<Void> unauthenticated(ServerHttpResponse response){
+    Mono<Void> unauthenticated(ServerHttpResponse response) {
         ApiResponse<?> apiResponse = ApiResponse.builder()
                 .code(8801)
                 .message("Unauthenticated")

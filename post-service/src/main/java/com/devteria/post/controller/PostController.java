@@ -40,4 +40,14 @@ public class PostController {
                 .result(postService.getMyPosts(page, size))
                 .build();
     }
+
+    @GetMapping("/myFollowingPosts")
+    ApiResponse<PageResponse<PostResponse>> myFollowingPosts(
+            @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(value = "size", required = false, defaultValue = "10") int size
+            ){
+        return ApiResponse.<PageResponse<PostResponse>>builder()
+                .result(postService.myFollowingPosts(page, size))
+                .build();
+    }
 }
