@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "2a4187ea-ed21-4720-ae6c-f0f1db519f13",
+		"_postman_id": "be7317fa-1827-41fb-8f1e-20fdce6f837d",
 		"name": "postmanViet",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "39312366"
+		"_exporter_id": "29877640"
 	},
 	"item": [
 		{
@@ -59,7 +59,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTcyMDk2MDAxMywiaWF0IjoxNzIwOTU2NDEzLCJqdGkiOiI0MTVkOTVlNS1jMDBmLTQ4MGItOGQzZi01MDQwNTYwMzM1YmUiLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.3l0QhYn8tQspeXMwUbMz6YB_E35AN9xsZkQehe-H0Yy6WF2PHqr5WgNLBRMldj2bPk81_gWFdhY78uoWto4Xnw",
+									"value": "",
 									"type": "string"
 								}
 							]
@@ -67,7 +67,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8888/api/v1/profile/users/9419c3ca-6685-4362-8cff-e487c372e68e",
+							"raw": "http://localhost:8888/api/v1/profile/users/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -78,7 +78,7 @@
 								"v1",
 								"profile",
 								"users",
-								"9419c3ca-6685-4362-8cff-e487c372e68e"
+								"1"
 							]
 						}
 					},
@@ -92,7 +92,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiIyIiwiZXhwIjoxNzMwNTUwODY1LCJpYXQiOjE3MzA1MTQ4NjUsImp0aSI6ImI0NjlkZWViLTJkNGEtNDc1Mi1hZTVkLTNkMmE1ZTU0ODdmMyIsInNjb3BlIjoiUk9MRV9BUlRJU1QgbWFuYWdlX293bl9tdXNpYyBsaXN0ZW5fZnJlZV9tdXNpYyBsaXN0ZW5fcHJlbWl1bV9tdXNpYyB2aWV3X3N0YXRpc3RpY3MgdXBsb2FkX211c2ljIn0.yzxqLjQNN_mTRdsj8gEu_Ng143sVLD3xuvwlOTj3MZTfxa2dRpoDQdCV0GcR_9pLkG9k633Q9pHSaTlmdYx_MQ",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiIzMjM4ZmQxMS1mZjhjLTQ1MDYtOTM4YS0xM2I4OWM5MTVhYjYiLCJleHAiOjE3MzE1MzIxMTQsImlhdCI6MTczMTQ5NjExNCwianRpIjoiODcxMmM2MWUtOTNiYi00YTQ3LWJlMWItMDUxYzQ0ZDE4ZGFkIiwic2NvcGUiOiJST0xFX0dVRVNUIGxpc3Rlbl9mcmVlX211c2ljIn0.Kaiuq7JlSvgGqRvFFGUKWqeT1h5nkevJ7rGDoV4B7vjAXyPrd_mv7IaWENqolfd8lE2UKerHKEMduqnjMiDlEQ",
 									"type": "string"
 								}
 							]
@@ -125,7 +125,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiI5ZDgwNzA5Yy03NWJlLTQ4ODItYWJmMi0zZTg4Zjk3OTE5MjEiLCJleHAiOjE3MjkwODE1MjcsImlhdCI6MTcyOTA3NzkyNywianRpIjoiY2RkOTU2MDgtYzdlMC00OWM2LWExZjQtMDY3MzljMjM3OGI3Iiwic2NvcGUiOiJST0xFX0FETUlOIn0.soup1Za-giTeFsqQH2KoohPWtgQRHG4FMhFENj-M7_gwUoquGZcz6zLqbwsc5ovTk52xQXod_lUcIHtslr58UQ",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJlZjcwNzkwMy05MGQ1LTQyNTgtYTk1My01M2NkMTBhNTk0YmIiLCJleHAiOjE3MzA4Mzc0OTYsImlhdCI6MTczMDgwMTQ5NiwianRpIjoiYTM4YThjY2QtNjljMS00MDE3LWE2NTItZTk3NGU1NTg1OGZmIiwic2NvcGUiOiJST0xFX0dVRVNUIGxpc3Rlbl9mcmVlX211c2ljIn0.EB1Eyeqp91pm5yZwk4btwBwTOgECpwfYHv24UTvlVnT9C3rF8_DWXPAF8KSDxtwl9lRRe8R4mku5-Cg3f4J5Ng",
 									"type": "string"
 								}
 							]
@@ -157,7 +157,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiI5ZDgwNzA5Yy03NWJlLTQ4ODItYWJmMi0zZTg4Zjk3OTE5MjEiLCJleHAiOjE3MjkwODE1MjcsImlhdCI6MTcyOTA3NzkyNywianRpIjoiY2RkOTU2MDgtYzdlMC00OWM2LWExZjQtMDY3MzljMjM3OGI3Iiwic2NvcGUiOiJST0xFX0FETUlOIn0.soup1Za-giTeFsqQH2KoohPWtgQRHG4FMhFENj-M7_gwUoquGZcz6zLqbwsc5ovTk52xQXod_lUcIHtslr58UQ",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiIyYWU3MDUxMS0xOTkxLTRiYTYtYmEyNS1jYjNjNDBmMzE5MjMiLCJleHAiOjE3MzI3MzczNzksImlhdCI6MTczMjcwMTM3OSwianRpIjoiNWUxZWM2MDgtNDE5MS00YjdlLWJiNTgtNmVkZmQ3Y2JmMGM0Iiwic2NvcGUiOiJST0xFX0dVRVNUIGxpc3Rlbl9mcmVlX211c2ljIn0.QC3DTI360A87I1uYL_UPTq7_FaULEyfIbXxCKIOqdH9GxmpzMlh60_41pVmLhNE3WT2KIHRFSkAjJlIGaeaKAA",
 									"type": "string"
 								}
 							]
@@ -174,7 +174,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8888/api/v1/profile/users/followUserOrUnfollowUser?targetUserId=3",
+							"raw": "http://localhost:8888/api/v1/profile/users/followUserOrUnfollowUser?targetUserId=2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -190,7 +190,7 @@
 							"query": [
 								{
 									"key": "targetUserId",
-									"value": "3"
+									"value": "2"
 								}
 							]
 						}
@@ -204,7 +204,14 @@
 					},
 					"request": {
 						"auth": {
-							"type": "bearer"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
@@ -218,7 +225,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8888/api/v1/profile/users/seachStageName?stageName=v&page=1&size=10",
+							"raw": "http://localhost:8888/api/v1/profile/users/seachStageName?stageName=sơn&page=1&size=10",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -234,7 +241,7 @@
 							"query": [
 								{
 									"key": "stageName",
-									"value": "v"
+									"value": "sơn"
 								},
 								{
 									"key": "page",
@@ -264,7 +271,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"john99\",\r\n    \"password\": \"123456\",\r\n    \"email\": \"john123@yopmail.com\",\r\n    \"firstName\": \"Jame4\",\r\n    \"lastName\": \"Bond\",\r\n    \"dob\": \"2000-04-08\",\r\n    \"city\" : \"London\"\r\n}",
+							"raw": "{\r\n    \"username\": \"john2\",\r\n    \"password\": \"123456\",\r\n    \"email\": \"johyopmail.com\",\r\n    \"firstName\": \"Jame\",\r\n    \"lastName\": \"Bond\",\r\n    \"dob\": \"2020-04-08\",\r\n    \"city\" : \"London\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -331,6 +338,38 @@
 						"body": {
 							"mode": "raw",
 							"raw": "// {\r\n//     \"username\": \"admin\",\r\n//     \"password\": \"admin\"\r\n// }\r\n// {\r\n//     \"username\": \"sontung\",\r\n//     \"password\": \"123456\"\r\n// }\r\n{\r\n    \"username\": \"john99\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/api/v1/identity/auth/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"identity",
+								"auth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get token (aws)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": null,\r\n    \"password\": \"sds\"\r\n}\r\n// {\r\n//     \"username\": \"sontung\",\r\n//     \"password\": \"123456\"\r\n// }\r\n// {\r\n//     \"username\": \"bichphuong\",\r\n//     \"password\": \"123456\"\r\n// }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1127,6 +1166,38 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "myFollowingPosts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiIyYWU3MDUxMS0xOTkxLTRiYTYtYmEyNS1jYjNjNDBmMzE5MjMiLCJleHAiOjE3MzMxODc2MzQsImlhdCI6MTczMzE1MTYzNCwianRpIjoiYmJiZmI5Y2MtYjM5Zi00OWYwLThmNDAtNjc1NWU2YmQwOWRmIiwic2NvcGUiOiJST0xFX0dVRVNUIGxpc3Rlbl9mcmVlX211c2ljIn0.qj-FKTabCryvXNiZMSmLn_Pk5FpUn4qtD7y2HfuvTlXrSZW0QPcNRKwv-zM3vNeKnHdDLvlslEkTyIScwZThLA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/api/v1/post/myFollowingPosts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"post",
+								"myFollowingPosts"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -1553,7 +1624,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"id\": \"1\",\r\n  \"name\": \"SongName\",\r\n  \"title\": \"Title\",\r\n  \"album\": \"Album\",\r\n  \"duration\": 240,\r\n  \"desc\": \"Description\",\r\n  \"releaseDate\": \"2024-10-27\",\r\n  \"artistID\": [\"\", \"\"]\r\n}\r\n",
+									"raw": "// {\r\n//   \"id\": \"1\",\r\n//   \"name\": \"SongName\",\r\n//   \"title\": \"Title\",\r\n//   \"album\": \"Album\",\r\n//   \"duration\": 240,\r\n//   \"desc\": \"Description\",\r\n//   \"releaseDate\": \"2024-10-27\",\r\n//   \"artistID\": [\"\", \"\"]\r\n// }\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1561,7 +1632,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8888/api/v1/music/songs/getSongsByArtistId/2",
+									"raw": "http://localhost:8888/api/v1/music/songs/getSongsByArtistId/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1573,7 +1644,7 @@
 										"music",
 										"songs",
 										"getSongsByArtistId",
-										"2"
+										"1"
 									]
 								}
 							},
@@ -1685,6 +1756,54 @@
 								"data",
 								"stream",
 								"anh1.jpg"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payment_Sevice",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiIyYWU3MDUxMS0xOTkxLTRiYTYtYmEyNS1jYjNjNDBmMzE5MjMiLCJleHAiOjE3MzMxODgwNTEsImlhdCI6MTczMzE1MjA1MSwianRpIjoiYWMyMDY5M2UtZjI2Zi00ZmFmLWJiYzYtYzBhNjEzMzcyNTZiIiwic2NvcGUiOiJST0xFX0dVRVNUIGxpc3Rlbl9mcmVlX211c2ljIn0.D1WFAJ09i__fzVun0w8_X6v33E7VYhWFnL45L1viX3bNhFuFNZW3Qbs8XITH6L9ihW0mqkAktiU_FtAvjgcCQA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/api/v1/identity/vnpay/create_payment?amount=100000&bankCode=NCB",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"identity",
+								"vnpay",
+								"create_payment"
+							],
+							"query": [
+								{
+									"key": "amount",
+									"value": "100000"
+								},
+								{
+									"key": "bankCode",
+									"value": "NCB"
+								}
 							]
 						}
 					},
