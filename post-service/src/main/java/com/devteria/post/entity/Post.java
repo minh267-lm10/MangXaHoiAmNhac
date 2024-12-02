@@ -24,8 +24,8 @@ public class Post {
     String userId;
     String content;
     String img;
-    @CreatedDate
     Instant createdDate;
-    @LastModifiedDate
     Instant modifiedDate;
+
+
 }

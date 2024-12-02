@@ -139,7 +139,9 @@ public class UserProfileService {
                     .build();
     }
 
-    public List<String> getUserIdsFollowing(String userId) {
-        return userProfileRepository.findUserIdsFollowing(userId);
+    public List<UserProfileResponse> getUserIdsFollowing(String userId) {
+        return userProfileRepository.findUserIdsFollowing(userId).stream()
+                .map(userProfileMapper::toUserProfileReponse)
+                .toList();
     }
 }

@@ -55,7 +55,7 @@ public interface UserProfileRepository extends Neo4jRepository<UserProfile, Stri
     @Query("MATCH (u:UserProfile)-[f:FOLLOWS]->(i:UserProfile) WHERE i.userId = $userId  RETURN count(f)")
     long countFollowers(String userId);
 
-    //Truy vấn dánh sách id người dùng đang theo dõi
-    @Query("MATCH (u:UserProfile)-[f:FOLLOWS]->(i:UserProfile) WHERE u.userId = $userId  RETURN i.userId")
-    List<String> findUserIdsFollowing(String userId);
+    // Truy vấn dánh sách id người dùng đang theo dõi
+    @Query("MATCH (u:UserProfile)-[f:FOLLOWS]->(i:UserProfile) WHERE u.userId = $userId  RETURN i")
+    List<UserProfile> findUserIdsFollowing(String userId);
 }

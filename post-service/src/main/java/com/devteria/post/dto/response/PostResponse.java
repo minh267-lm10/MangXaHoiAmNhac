@@ -21,4 +21,7 @@ public class PostResponse {
     Instant createdDate;
     Instant modifiedDate;
     String img;
+
+    String stageName;
+    String imgUser;
 }

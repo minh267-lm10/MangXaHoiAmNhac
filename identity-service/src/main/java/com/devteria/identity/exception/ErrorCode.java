@@ -21,6 +21,9 @@ public enum ErrorCode {
     ROLE_NOT_EXISTED(1010, "Role not existed|Vai trò không tồn tại", HttpStatus.NOT_FOUND),
     NOT_NULL_USERNAME(1011, "Username is required", HttpStatus.BAD_REQUEST),
     NOT_NULL_PASSWORD(1012, "Password is required", HttpStatus.BAD_REQUEST),
+    USER_NOT_FOUND(1013, "User not found", HttpStatus.NOT_FOUND),
+    ROLE_NOT_FOUND(1014, "Role not found", HttpStatus.NOT_FOUND),
+    PAYMENT_FAILED(1015, "Payment failed", HttpStatus.BAD_REQUEST),
     ;
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {
