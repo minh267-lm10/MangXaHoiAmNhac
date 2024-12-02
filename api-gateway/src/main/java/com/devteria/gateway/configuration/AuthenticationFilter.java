@@ -57,6 +57,8 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
             "/identity/auth/outbound/authentication",
 
             "/profile/internal/users/getUserIdsFollowing",
+
+            "/identity/vnpay/return"
     };
 
     @Value("${app.api-prefix}")
