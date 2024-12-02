@@ -1,5 +1,9 @@
-package com.devteria.identity.dto.response;
+package com.devteria.identity.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -9,7 +13,11 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ReturnVNpayResponse {
+@Entity(name = "payment-data-point")
+public class PaymentDataPoint {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    String id;
     String message;
     String vnp_Amount;
     String vnp_BankCode;
@@ -18,4 +26,5 @@ public class ReturnVNpayResponse {
     String vnp_OrderInfo;
     String vnp_PayDate;
     String vnp_ResponseCode;
+
 }

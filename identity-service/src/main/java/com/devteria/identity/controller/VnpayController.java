@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import com.devteria.identity.repository.PaymentDataPointRepository;
 import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.security.core.Authentication;
@@ -19,7 +20,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.devteria.identity.configuration.Config;
 import com.devteria.identity.constant.PredefinedRole;
 import com.devteria.identity.dto.ApiResponse;
-import com.devteria.identity.dto.response.ReturnVNpayResponse;
+import com.devteria.identity.entity.PaymentDataPoint;
 import com.devteria.identity.entity.Role;
 import com.devteria.identity.entity.User;
 import com.devteria.identity.exception.AppException;
@@ -35,6 +36,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/vnpay")
 @AllArgsConstructor
 public class VnpayController {
+    PaymentDataPointRepository paymentDataPointRepository;
     UserService userService;
     UserRepository userRepository;
     //	PlaylistRepository playlistR;
@@ -43,7 +45,8 @@ public class VnpayController {
     RoleRepository roleRepository;
 
     @GetMapping("/create_payment")
-    public RedirectView createPayment(HttpServletRequest req) throws UnsupportedEncodingException {
+//    public ApiResponse<?> createPayment(HttpServletRequest req) throws UnsupportedEncodingException {
+        public RedirectView createPayment(HttpServletRequest req) throws UnsupportedEncodingException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = authentication.getName();
         User viet = userRepository.findByid(userId);
@@ -128,20 +131,10 @@ public class VnpayController {
         redirectView.setUrl(paymentUrl);
         return redirectView;
 
-
     }
 
-    // http://localhost:8080/vnpay/return?
-    // vnp_Amount=10000000000&
-    // vnp_BankCode=NCB&
-    // vnp_BankTranNo=VNP14373910&
-    // vnp_CardType=ATM&
-    // vnp_OrderInfo=Thanh+toan+don+hang%3A20622293&
-    // vnp_PayDate=20240411085935&
-    // vnp_ResponseCode=00&
-    // vnp_TmnCode=EYY1S4IO&vnp_TransactionNo=14373910&vnp_TransactionStatus=00&vnp_TxnRef=20622293&vnp_SecureHash=3ab9e87ec019f3f42695dbdcf2a2b0121c280ee35eaf65881bd029deaf3bb6e9b69ae63855cd5c08efc2ef82bbcc80ec38e529fada5bd7b437da6cdbdc1ad6e0
     @GetMapping("/return")
-    public ApiResponse<ReturnVNpayResponse> returnVNpay(
+    public RedirectView returnVNpay(
             @RequestParam String vnp_Amount,
             @RequestParam String vnp_BankCode,
             @RequestParam String vnp_BankTranNo,
@@ -150,134 +143,41 @@ public class VnpayController {
             @RequestParam String vnp_PayDate,
             @RequestParam String vnp_ResponseCode) {
 
-        switch (vnp_ResponseCode) {
-            case "00":
-                String username = vnp_OrderInfo;
-                User viet = userRepository.findByUsername(username).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
-                Role role = roleRepository
-                        .findById(PredefinedRole.SUBSCRIBER_ROLE)
-                        .orElseThrow(() -> new AppException(ErrorCode.ROLE_NOT_FOUND));
+        if (vnp_ResponseCode.equals("00")) {
+            String username = vnp_OrderInfo;
+            User viet = userRepository.findByUsername(username).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+            Role role = roleRepository
+                    .findById(PredefinedRole.SUBSCRIBER_ROLE)
+                    .orElseThrow(() -> new AppException(ErrorCode.ROLE_NOT_FOUND));
 
-                viet.getRoles().add(role);
-                userRepository.save(viet);
+            viet.getRoles().add(role);
+            userRepository.save(viet);
 
-                return ApiResponse.<ReturnVNpayResponse>builder()
-                        .message("Giao dịch thành công")
-                        .result(ReturnVNpayResponse.builder()
-                                .message("Giao dịch thành công")
-                                .vnp_Amount(vnp_Amount)
-                                .vnp_BankCode(vnp_BankCode)
-                                .vnp_BankTranNo(vnp_BankTranNo)
-                                .vnp_CardType(vnp_CardType)
-                                .vnp_OrderInfo(vnp_OrderInfo)
-                                .vnp_PayDate(vnp_PayDate)
-                                .vnp_ResponseCode(vnp_ResponseCode)
-                                .build())
-                        .build();
 
-            case "01":
-                return ApiResponse.<ReturnVNpayResponse>builder()
-                        .message("Giao dịch chưa hoàn tất")
-                        .result(ReturnVNpayResponse.builder()
-                                .message("Giao dịch chưa hoàn tất")
-                                .vnp_Amount(vnp_Amount)
-                                .vnp_BankCode(vnp_BankCode)
-                                .vnp_BankTranNo(vnp_BankTranNo)
-                                .vnp_CardType(vnp_CardType)
-                                .vnp_OrderInfo(vnp_OrderInfo)
-                                .vnp_PayDate(vnp_PayDate)
-                                .vnp_ResponseCode(vnp_ResponseCode)
-                                .build())
-                        .build();
-            case "02":
-                return ApiResponse.<ReturnVNpayResponse>builder()
-                        .message("Giao dịch bị lỗi")
-                        .result(ReturnVNpayResponse.builder()
-                                .message("Giao dịch bị lỗi")
-                                .vnp_Amount(vnp_Amount)
-                                .vnp_BankCode(vnp_BankCode)
-                                .vnp_BankTranNo(vnp_BankTranNo)
-                                .vnp_CardType(vnp_CardType)
-                                .vnp_OrderInfo(vnp_OrderInfo)
-                                .vnp_PayDate(vnp_PayDate)
-                                .vnp_ResponseCode(vnp_ResponseCode)
-                                .build())
-                        .build();
-            case "04":
-                return ApiResponse.<ReturnVNpayResponse>builder()
-                        .message(
-                                "Giao dịch đảo (Khách hàng đã bị trừ tiền tại Ngân hàng nhưng GD chưa thành công ở VNPAY)")
-                        .result(ReturnVNpayResponse.builder()
-                                .message(
-                                        "Giao dịch đảo (Khách hàng đã bị trừ tiền tại Ngân hàng nhưng GD chưa thành công ở VNPAY)")
-                                .vnp_Amount(vnp_Amount)
-                                .vnp_BankCode(vnp_BankCode)
-                                .vnp_BankTranNo(vnp_BankTranNo)
-                                .vnp_CardType(vnp_CardType)
-                                .vnp_OrderInfo(vnp_OrderInfo)
-                                .vnp_PayDate(vnp_PayDate)
-                                .vnp_ResponseCode(vnp_ResponseCode)
-                                .build())
-                        .build();
-            case "05":
-                return ApiResponse.<ReturnVNpayResponse>builder()
-                        .message("VNPAY đang xử lý giao dịch này (GD hoàn tiền)")
-                        .result(ReturnVNpayResponse.builder()
-                                .message("VNPAY đang xử lý giao dịch này (GD hoàn tiền)")
-                                .vnp_Amount(vnp_Amount)
-                                .vnp_BankCode(vnp_BankCode)
-                                .vnp_BankTranNo(vnp_BankTranNo)
-                                .vnp_CardType(vnp_CardType)
-                                .vnp_OrderInfo(vnp_OrderInfo)
-                                .vnp_PayDate(vnp_PayDate)
-                                .vnp_ResponseCode(vnp_ResponseCode)
-                                .build())
-                        .build();
-            case "06":
-                return ApiResponse.<ReturnVNpayResponse>builder()
-                        .message("VNPAY đã gửi yêu cầu hoàn tiền sang Ngân hàng (GD hoàn tiền)")
-                        .result(ReturnVNpayResponse.builder()
-                                .message("VNPAY đã gửi yêu cầu hoàn tiền sang Ngân hàng (GD hoàn tiền)")
-                                .vnp_Amount(vnp_Amount)
-                                .vnp_BankCode(vnp_BankCode)
-                                .vnp_BankTranNo(vnp_BankTranNo)
-                                .vnp_CardType(vnp_CardType)
-                                .vnp_OrderInfo(vnp_OrderInfo)
-                                .vnp_PayDate(vnp_PayDate)
-                                .vnp_ResponseCode(vnp_ResponseCode)
-                                .build())
-                        .build();
-            case "07":
-                return ApiResponse.<ReturnVNpayResponse>builder()
-                        .message("Giao dịch bị nghi ngờ gian lận")
-                        .result(ReturnVNpayResponse.builder()
-                                .message("Giao dịch bị nghi ngờ gian lận")
-                                .vnp_Amount(vnp_Amount)
-                                .vnp_BankCode(vnp_BankCode)
-                                .vnp_BankTranNo(vnp_BankTranNo)
-                                .vnp_CardType(vnp_CardType)
-                                .vnp_OrderInfo(vnp_OrderInfo)
-                                .vnp_PayDate(vnp_PayDate)
-                                .vnp_ResponseCode(vnp_ResponseCode)
-                                .build())
-                        .build();
-            case "09":
-                return ApiResponse.<ReturnVNpayResponse>builder()
-                        .message("GD Hoàn trả bị từ chối")
-                        .result(ReturnVNpayResponse.builder()
-                                .message("GD Hoàn trả bị từ chối")
-                                .vnp_Amount(vnp_Amount)
-                                .vnp_BankCode(vnp_BankCode)
-                                .vnp_BankTranNo(vnp_BankTranNo)
-                                .vnp_CardType(vnp_CardType)
-                                .vnp_OrderInfo(vnp_OrderInfo)
-                                .vnp_PayDate(vnp_PayDate)
-                                .vnp_ResponseCode(vnp_ResponseCode)
-                                .build())
-                        .build();
+            paymentDataPointRepository.save(PaymentDataPoint.builder()
+                    .message("Giao dịch thành công")
+                    .vnp_Amount(vnp_Amount)
+                    .vnp_BankCode(vnp_BankCode)
+                    .vnp_BankTranNo(vnp_BankTranNo)
+                    .vnp_CardType(vnp_CardType)
+                    .vnp_OrderInfo(vnp_OrderInfo)
+                    .vnp_PayDate(vnp_PayDate)
+                    .vnp_ResponseCode(vnp_ResponseCode)
+                    .build());
 
-            default:
-                throw new AppException(ErrorCode.PAYMENT_FAILED);
+        } else {
+            paymentDataPointRepository.save(PaymentDataPoint.builder()
+                    .vnp_Amount(vnp_Amount)
+                    .vnp_BankCode(vnp_BankCode)
+                    .vnp_BankTranNo(vnp_BankTranNo)
+                    .vnp_CardType(vnp_CardType)
+                    .vnp_OrderInfo(vnp_OrderInfo)
+                    .vnp_PayDate(vnp_PayDate)
+                    .vnp_ResponseCode(vnp_ResponseCode)
+                    .build());
         }
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("http://localhost:3000");
+        return redirectView;
     }
 }
