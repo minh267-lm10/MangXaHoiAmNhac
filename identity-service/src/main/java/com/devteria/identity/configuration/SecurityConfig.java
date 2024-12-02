@@ -26,9 +26,11 @@ public class SecurityConfig {
             "/auth/refresh",
             "/",
             "/auth/outbound/authentication",
+
+    };
+    private static final String[] PUBLIC_ENDPOINTS_GET = {
             "/vnpay/return"
     };
-    private static final String[] PUBLIC_ENDPOINTS_GET = {};
 
     private final CustomJwtDecoder customJwtDecoder;
 

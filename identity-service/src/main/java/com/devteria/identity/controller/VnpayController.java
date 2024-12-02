@@ -43,7 +43,7 @@ public class VnpayController {
     RoleRepository roleRepository;
 
     @GetMapping("/create_payment")
-    public RedirectView createPayment(HttpServletRequest req) throws UnsupportedEncodingException {
+    public ApiResponse<?> createPayment(HttpServletRequest req) throws UnsupportedEncodingException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = authentication.getName();
         User viet = userRepository.findByid(userId);
@@ -123,10 +123,10 @@ public class VnpayController {
         queryUrl += "&vnp_SecureHash=" + vnp_SecureHash;
         String paymentUrl = Config.vnp_PayUrl + "?" + queryUrl;
 
-//        return ApiResponse.builder().message(paymentUrl).build();
-        RedirectView redirectView = new RedirectView();
-        redirectView.setUrl(paymentUrl);
-        return redirectView;
+        return ApiResponse.builder().message(paymentUrl).build();
+//        RedirectView redirectView = new RedirectView();
+//        redirectView.setUrl(paymentUrl);
+//        return redirectView;
 
         //		return ResponseEntity.ok().body(new VietMessage(00,null,paymentUrl));
         //        com.google.gson.JsonObject job = new JsonObject();
