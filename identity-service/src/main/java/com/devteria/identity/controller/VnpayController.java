@@ -128,15 +128,6 @@ public class VnpayController {
         redirectView.setUrl(paymentUrl);
         return redirectView;
 
-        //		return ResponseEntity.ok().body(new VietMessage(00,null,paymentUrl));
-        //        com.google.gson.JsonObject job = new JsonObject();
-        //        job.addProperty("code", "00");
-        //        job.addProperty("message", "success");
-        //        job.addProperty("data", paymentUrl);
-        //        Gson gson = new Gson();
-        //        resp.getWriter().write(gson.toJson(job));
-
-        //
 
     }
 
