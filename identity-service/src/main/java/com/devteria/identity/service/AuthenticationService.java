@@ -197,8 +197,7 @@ public class AuthenticationService {
 
         var userId = signedJWT.getJWTClaimsSet().getSubject();
 
-        var user =
-                userRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+        var user = userRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
         var token = generateToken(user);
 
         return AuthenticationResponse.builder().token(token).build();

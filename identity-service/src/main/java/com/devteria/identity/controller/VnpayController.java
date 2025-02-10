@@ -6,7 +6,6 @@ import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import com.devteria.identity.repository.PaymentDataPointRepository;
 import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.security.core.Authentication;
@@ -25,6 +24,7 @@ import com.devteria.identity.entity.Role;
 import com.devteria.identity.entity.User;
 import com.devteria.identity.exception.AppException;
 import com.devteria.identity.exception.ErrorCode;
+import com.devteria.identity.repository.PaymentDataPointRepository;
 import com.devteria.identity.repository.RoleRepository;
 import com.devteria.identity.repository.UserRepository;
 import com.devteria.identity.service.UserService;
@@ -46,7 +46,7 @@ public class VnpayController {
 
     @GetMapping("/create_payment")
     public ApiResponse<?> createPayment(HttpServletRequest req) throws UnsupportedEncodingException {
-//        public RedirectView createPayment(HttpServletRequest req) throws UnsupportedEncodingException {
+        //        public RedirectView createPayment(HttpServletRequest req) throws UnsupportedEncodingException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = authentication.getName();
         User viet = userRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
@@ -127,9 +127,9 @@ public class VnpayController {
         String paymentUrl = Config.vnp_PayUrl + "?" + queryUrl;
 
         return ApiResponse.builder().message(paymentUrl).build();
-//        RedirectView redirectView = new RedirectView();
-//        redirectView.setUrl(paymentUrl);
-//        return redirectView;
+        //        RedirectView redirectView = new RedirectView();
+        //        redirectView.setUrl(paymentUrl);
+        //        return redirectView;
 
     }
 
@@ -145,14 +145,15 @@ public class VnpayController {
 
         if (vnp_ResponseCode.equals("00")) {
             String username = vnp_OrderInfo;
-            User viet = userRepository.findByUsername(username).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+            User viet = userRepository
+                    .findByUsername(username)
+                    .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
             Role role = roleRepository
                     .findById(PredefinedRole.SUBSCRIBER_ROLE)
                     .orElseThrow(() -> new AppException(ErrorCode.ROLE_NOT_FOUND));
 
             viet.getRoles().add(role);
             userRepository.save(viet);
-
 
             paymentDataPointRepository.save(PaymentDataPoint.builder()
                     .message("Giao dịch thành công")

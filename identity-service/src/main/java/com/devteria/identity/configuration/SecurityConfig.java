@@ -19,18 +19,15 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private static final String[] PUBLIC_ENDPOINTS_POST = {
-            "/users/registration/**",
-            "/auth/token",
-            "/auth/introspect",
-            "/auth/logout",
-            "/auth/refresh",
-            "/",
-            "/auth/outbound/authentication",
-
+        "/users/registration/**",
+        "/auth/token",
+        "/auth/introspect",
+        "/auth/logout",
+        "/auth/refresh",
+        "/",
+        "/auth/outbound/authentication",
     };
-    private static final String[] PUBLIC_ENDPOINTS_GET = {
-            "/vnpay/return"
-    };
+    private static final String[] PUBLIC_ENDPOINTS_GET = {"/vnpay/return"};
 
     private final CustomJwtDecoder customJwtDecoder;
 
@@ -40,8 +37,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeHttpRequests(request ->
-                request.requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS_POST)
+        httpSecurity.authorizeHttpRequests(request -> request.requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS_POST)
                 .permitAll()
                 .requestMatchers(HttpMethod.GET, PUBLIC_ENDPOINTS_GET)
                 .permitAll()
